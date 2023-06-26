@@ -1,0 +1,81 @@
+.messages{
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  height: calc(100vh - 130px);
+  margin: 0.5rem 0;
+}
+
+.inbox{
+  background-color: #F2F2F2;
+  height: 100%
+}
+
+.viewport {
+  height: 100%;
+  width: 336px;
+}
+
+.contact {
+  max-width: 295px;
+  cursor:pointer;
+  margin-bottom: 1rem;
+}
+
+.RecruiterPhoto{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: calc(100vw - 900px);
+  min-width: 350px;
+}
+.chat-header{
+  max-width: 688px;
+  min-width: 300px;
+  border-radius: 10px;
+  background-color: #CBE0FF;
+}
+
+.conversation{
+  margin: 1rem 0;
+  padding: 16px;
+  border-radius: 10px;
+  height: calc(100vh - 350px);
+  background-color: #CBE0FF;
+
+  max-width: 688px;
+  width: auto;
+  min-width: 300px;
+}
+
+.bubble1{
+  text-align: left;
+  background-color: white;
+  border-radius: 10px;
+  width: 50%;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.bubble2{
+  text-align: left;
+  background-color: white;
+  border-radius: 10px;
+  width: 50%;
+  margin: 1rem;
+  padding: 1rem;
+  margin-left: auto;
+}
+
+.answer{
+  align-items: center;
+  margin-top: 1rem;
+  max-width: 688px;
+  min-width: 350px;
+}

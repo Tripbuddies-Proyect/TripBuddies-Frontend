@@ -1,0 +1,65 @@
+.mat-card {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 16px;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-details h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.profile-details p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+.banner-image img {
+  width: 100%;
+  height: auto;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.action-button {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+@media (max-width: 480px) {
+  .mat-card {
+    max-width: 100%;
+  }
+}

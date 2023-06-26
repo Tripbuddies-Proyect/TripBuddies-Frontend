@@ -1,0 +1,21 @@
+<div class="traveller-cards-container">
+  <mat-card *ngFor="let traveller of travellers" class="traveller-card">
+    <div class="traveller-profile">
+      <img [src]="traveller.image" alt="Profile Image">
+    </div>
+    <mat-card-content>
+      <h2>{{ traveller.firstName }}</h2>
+      <p>{{ traveller.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button color="primary" (click)="addMatch(traveller.id)">
+        <mat-icon>favorite</mat-icon>
+      </button>
+      <button mat-raised-button color="primary" (click)="openMessageDialog(traveller.id)">Send message <mat-icon>sms</mat-icon></button>
+      <button mat-raised-button color="primary" (click)="openNotificationDialog(traveller.id)">Send Notification <mat-icon>notification_important</mat-icon></button>
+
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+

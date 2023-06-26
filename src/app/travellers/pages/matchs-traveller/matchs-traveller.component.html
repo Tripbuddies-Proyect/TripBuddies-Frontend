@@ -1,0 +1,16 @@
+
+<div class="traveller-cards-container">
+  <mat-card *ngFor="let item of response" class="traveller-card">
+    <div class="traveller-profile">
+      <img [src]="item.friend.image" alt="Profile Image">
+    </div>
+    <mat-card-content>
+      <h2>{{ item.friend.firstName }} {{ item.friend.lastName }}</h2>
+      <p> {{ item.friend.description }}</p>
+    </mat-card-content>
+    <button mat-icon-button color="warn" (click)="removeFriend(item.id)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card>
+  <div *ngIf="response.length === 0" style="padding: 16px;">No se encontraron amigos.</div>
+</div>

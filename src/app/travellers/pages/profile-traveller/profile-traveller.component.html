@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Perfil</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="profile-container">
+      <div class="profile-avatar">
+        <img [src]="traveller.image" alt="Imagen de perfil" />
+      </div>
+      <div class="profile-details">
+        <h2>{{ traveller.firstName }} {{ traveller.lastName }}</h2>
+        <p>{{ traveller.description }}</p>
+        <p>Phone: {{ traveller.phone }}</p>
+        <button mat-icon-button color="primary" (click)="openEditDialog()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="banner-image">
+      <img [src]="traveller.bannerImage" alt="Imagen de portada" />
+    </div>
+    <div class="profile-actions">
+      <button mat-raised-button color="primary" class="action-button">Add Friend</button>
+      <button mat-raised-button color="accent" class="action-button">Message</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<ng-template #editDialog>
+  <h2>Editar perfil</h2>
+  <mat-form-field>
+    <mat-label>Descripción</mat-label>
+    <textarea matInput [(ngModel)]="traveller.description"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Celular</mat-label>
+    <input matInput type="text" [(ngModel)]="traveller.phone" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Imagen de perfil</mat-label>
+    <input matInput type="text" [(ngModel)]="traveller.image" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Correo electrónico</mat-label>
+    <input matInput type="email" [(ngModel)]="traveller.email" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Contraseña</mat-label>
+    <input matInput type="password" [(ngModel)]="traveller.password" />
+  </mat-form-field>
+  <div class="edit-buttons">
+    <button mat-raised-button color="primary" (click)="saveChanges()">Guardar cambios</button>
+    <button mat-raised-button color="warn" (click)="closeEditDialog()">Cancelar</button>
+  </div>
+</ng-template>

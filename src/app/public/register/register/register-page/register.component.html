@@ -1,0 +1,21 @@
+<div class="container">
+
+  <div class="sign-up">
+    <h1>Sign up</h1>
+  </div>
+  <div class="form-container">
+    <div class="title">
+      <button mat-icon-button class="btn-back" routerLink="/login">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1 class="text">Get Started With TourMates</h1>
+    </div>
+    <section class="items-section">
+      <mat-radio-group>
+        <mat-radio-button routerLink="traveller" class="items-margin" value="after" checked>Traveller</mat-radio-button>
+        <mat-radio-button  routerLink="bussiness"  class="items-margin" value="before">Bussiness</mat-radio-button>
+      </mat-radio-group>
+    </section>
+    <router-outlet></router-outlet>
+  </div>
+</div>
