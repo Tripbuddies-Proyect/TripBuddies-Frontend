@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.option {
+  margin-bottom: 20px;
+}
+
+.results {
+  margin-top: 20px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.photo-cell {
+  width: 150px;
+}
+
+.photo-cell img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.review-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.review-info h3 {
+  margin: 0;
+}
+
+.review-actions {
+  margin-left: auto;
+}
+
+.create-review {
+  margin-top: 20px;
+}
+
+.edit-buttons {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .results {
+    overflow-x: auto;
+  }
+
+  table {
+    width: auto;
+  }
+
+  th,
+  td {
+    white-space: nowrap;
+  }
+}
+.place-image {
+  width: 100%;
+  height: 100%; /* Ajusta el tamaño según tus necesidades */
+}
+
+.profile-image {
+  width: 50px; /* Ajusta el tamaño según tus necesidades */
+  height: 50px; /* Ajusta el tamaño según tus necesidades */
+}
+.add-review-button {
+  margin-bottom: 10px;
+}
+
+.add-review-button button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.add-review-button button:hover {
+  background-color: #0069d9;
+}
+
+.add-review-button button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.add-review-button button:active {
+  background-color: #0056b3;
+}
+
