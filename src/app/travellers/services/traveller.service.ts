@@ -5,6 +5,7 @@ import {Traveller} from "../models/traveller";
 import {Favorite} from "../models/favorite";
 import {Places} from "../../bussiness/model/places";
 import {Friendship} from "../models/friendship";
+import {Review} from "../models/review";
 
 @Injectable({
   providedIn: 'root'
@@ -109,8 +110,8 @@ export class TravellerService {
     return this.http.delete<object>(`${this.favoriteURL}/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
-  PostReview(travellerId: any): Observable<any>{
-    return this.http.post<any>(`${this.PostReviewURL}/${travellerId}`, this.httpOptions)
+  PostReview(travellerId: any, review: Review): Observable<any>{
+    return this.http.post<any>(`${this.PostReviewURL}/${travellerId}`, JSON.stringify(review), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   GetPlacesByLocation(location: string): Observable<Places>{

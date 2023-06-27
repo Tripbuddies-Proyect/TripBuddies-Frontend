@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {Review} from "../../models/review";
 import {Traveller} from "../../models/traveller";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-places-search',
@@ -18,18 +19,26 @@ export class PlacesSearchComponent implements OnInit{
   displayedColumns: string[] = ['photo', 'name', 'description', 'location', 'price', 'favorite', 'reviews'];
   place!: Places;
   newReviewContent: string = '';
-
+  review: Review;
   displayedColumns2: string[] = ['profileImage', 'fullName', 'reviewContent', 'actions'];
   reviewsData: Review[] = [];
-
+  reviewForm: FormGroup;
+  PlaceId: number = 0;
   @ViewChild('editDialog') editDialog!: TemplateRef<any>;
   @ViewChild('addReview') addReview!: TemplateRef<any>;
-  constructor(private placeService: TravellerService, private router: Router, private dialog: MatDialog) {}
+  @ViewChild('placesAll') placesAll!: TemplateRef<any>;
+  @ViewChild('locationAll') locationAll!: TemplateRef<any>;
+  constructor(private placeService: TravellerService, private router: Router, private dialog: MatDialog, private formBuilder: FormBuilder) {
+    this.review = { } as Review;
+    this.reviewForm = new FormGroup({
+      reviewText: new FormControl('', [Validators.required, Validators.maxLength(500)])
+    });
+
+  }
 
   ngOnInit(): void {
     const id = toInteger(localStorage.getItem("id"));
-    this.getAllPlaces();
-    this.loadReviews(this.places.map(place => place.id));
+
   }
   searchPlaces() {
     this.placeService.searchPlacesByLocation(this.searchLocation).subscribe(
@@ -42,7 +51,10 @@ export class PlacesSearchComponent implements OnInit{
       }
     );
   }
-
+  openLocationAll(){
+    this.dialog.open(this.locationAll);
+    this.searchPlaces();
+  }
   getAllPlaces() {
     this.placeService.GetAllPlaces().subscribe(
       (response: any) => {
@@ -68,14 +80,21 @@ export class PlacesSearchComponent implements OnInit{
   closeEditDialog(): void {
     this.dialog.closeAll();
   }
+  openAllPlaces(){
+    this.dialog.open(this.placesAll);
+    this.getAllPlaces()
+  }
 
-  createReview(place: any){
-    this.placeService.PostReview(place.id).subscribe(
+  createReview(id : number){
+    this.review.reviewText = this.reviewForm.get('reviewText')?.value;
+    this.placeService.PostReview(id, this.review).subscribe(
       (response: any) => {
         console.log(response);
+      },
+      (error: any) => {
+        console.error('Error al crear la reseña:', error);
       }
-
-    )
+    );
   }
   editReview(review: Review){
 

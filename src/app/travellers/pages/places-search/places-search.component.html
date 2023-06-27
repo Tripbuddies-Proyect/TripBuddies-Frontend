@@ -4,56 +4,110 @@
     <mat-form-field>
       <input matInput placeholder="Localización" [(ngModel)]="searchLocation">
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="searchPlaces()">Buscar</button>
+    <button mat-raised-button color="primary" (click)="openLocationAll()">Buscar</button>
   </div>
   <div class="option">
     <h3>Ver todos los lugares</h3>
-    <button mat-raised-button color="primary" (click)="getAllPlaces()">Ver todos</button>
+    <button mat-raised-button color="primary" (click)="openAllPlaces()">Ver todos</button>
   </div>
+  <ng-template #locationAll>
+    <div class="results mat-table-responsive" *ngIf="places.length > 0">
+      <table mat-table [dataSource]="places" class="mat-elevation-z8">
+        <!-- Column definitions -->
+        <ng-container matColumnDef="photo">
+          <th mat-header-cell *matHeaderCellDef>Foto</th>
+          <td mat-cell *matCellDef="let place"><img [src]="place.imageUrl" alt="Foto del lugar" width="150px" height="150px"></td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let place">{{ place.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let place">{{ place.description }}</td>
+        </ng-container>
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef>Localización</th>
+          <td mat-cell *matCellDef="let place">{{ place.location }}</td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Precio</th>
+          <td mat-cell *matCellDef="let place">{{ place.price }}</td>
+        </ng-container>
+        <ng-container matColumnDef="favorite">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let place">
+            <button mat-icon-button color="warn" (click)="addToFavorites(place.id)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="addToFavorites(place.id)">
+              <mat-icon>message</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="reviews">
+          <th mat-header-cell *matHeaderCellDef>Reseñas</th>
+          <td mat-cell *matCellDef="let place">
+            <button mat-raised-button color="primary" (click)="openEditDialog(place.id)" >Ver reseñas</button>
+          </td>
+        </ng-container>
 
-  <div class="results" *ngIf="places.length > 0">
-    <table mat-table [dataSource]="places" class="mat-elevation-z8">
-      <!-- Column definitions -->
-      <ng-container matColumnDef="photo">
-        <th mat-header-cell *matHeaderCellDef>Foto</th>
-        <td mat-cell *matCellDef="let place"><img [src]="place.imageUrl" alt="Foto del lugar" width="100%" height="100%"></td>
-      </ng-container>
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Nombre</th>
-        <td mat-cell *matCellDef="let place">{{ place.name }}</td>
-      </ng-container>
-      <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef>Descripción</th>
-        <td mat-cell *matCellDef="let place">{{ place.description }}</td>
-      </ng-container>
-      <ng-container matColumnDef="location">
-        <th mat-header-cell *matHeaderCellDef>Localización</th>
-        <td mat-cell *matCellDef="let place">{{ place.location }}</td>
-      </ng-container>
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Precio</th>
-        <td mat-cell *matCellDef="let place">{{ place.price }}</td>
-      </ng-container>
-      <ng-container matColumnDef="favorite">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let place">
-          <button mat-icon-button color="warn" (click)="addToFavorites(place.id)">
-            <mat-icon>favorite</mat-icon>
-          </button>
-        </td>
-      </ng-container>
-      <ng-container matColumnDef="reviews">
-        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-        <td mat-cell *matCellDef="let place">
-          <button mat-raised-button color="primary" (click)="openEditDialog(place.id)" >Ver reseñas</button>
-        </td>
-      </ng-container>
+        <!-- Table rows -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let place; columns: displayedColumns;"></tr>
+      </table>
+    </div>
 
-      <!-- Table rows -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let place; columns: displayedColumns;"></tr>
-    </table>
-  </div>
+  </ng-template>
+  <ng-template #placesAll>
+    <div class="results mat-table-responsive" *ngIf="places.length > 0">
+      <table mat-table [dataSource]="places" class="mat-elevation-z8">
+        <!-- Column definitions -->
+        <ng-container matColumnDef="photo">
+          <th mat-header-cell *matHeaderCellDef>Foto</th>
+          <td mat-cell *matCellDef="let place"><img [src]="place.imageUrl" alt="Foto del lugar" width="150px" height="150px"></td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let place">{{ place.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let place">{{ place.description }}</td>
+        </ng-container>
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef>Localización</th>
+          <td mat-cell *matCellDef="let place">{{ place.location }}</td>
+        </ng-container>
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef>Precio</th>
+          <td mat-cell *matCellDef="let place">{{ place.price }}</td>
+        </ng-container>
+        <ng-container matColumnDef="favorite">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let place">
+            <button mat-icon-button color="warn" (click)="addToFavorites(place.id)">
+              <mat-icon>favorite</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="addToFavorites(place.id)">
+              <mat-icon>message</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="reviews">
+          <th mat-header-cell *matHeaderCellDef>Reseñas</th>
+          <td mat-cell *matCellDef="let place">
+            <button mat-raised-button color="primary" (click)="openEditDialog(place.id)" >Ver reseñas</button>
+          </td>
+        </ng-container>
+
+        <!-- Table rows -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let place; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </ng-template>
+
 </div>
 
 <ng-template #editDialog>
@@ -85,28 +139,28 @@
         </button>
       </td>
     </ng-container>
-
     <!-- Table rows -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
     <tr mat-row *matRowDef="let review; columns: displayedColumns2;"></tr>
-    <ng-template #addReview>
-      <div class="create-review">
-        <h3>Escribir nueva reseña</h3>
-        <mat-form-field>
-          <mat-label>Reseña</mat-label>
-          <textarea matInput [(ngModel)]="newReviewContent" maxlength="500"></textarea>
-          <mat-hint align="end">{{ newReviewContent.length }}/500 caracteres</mat-hint>
-        </mat-form-field>
-        <div class="edit-buttons">
-          <button mat-raised-button color="primary" [disabled]="newReviewContent.length === 0" (click)="createReview(place.id)">Crear reseña</button>
-          <button mat-raised-button color="warn" (click)="closeEditDialog()">Cancelar</button>
-        </div>
-      </div>
-    </ng-template>
   </table>
-
 </ng-template>
 
+<ng-template #addReview>
+  <div class="create-review">
+    <h3>Escribir nueva reseña</h3>
+    <form [formGroup]="reviewForm">
+      <mat-form-field>
+        <mat-label>Reseña</mat-label>
+        <textarea matInput formControlName="reviewText" maxlength="500"></textarea>
+        <mat-hint align="end">{{ reviewForm.get('reviewText')?.value?.length }}/500 caracteres</mat-hint>
+      </mat-form-field>
+      <div class="edit-buttons">
+        <button mat-raised-button color="primary" [disabled]="reviewForm.get('reviewText')?.value?.length === 0" (click)="createReview(review.places.id)">Crear reseña</button>
+        <button mat-raised-button color="warn" (click)="closeEditDialog()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
 
 
 

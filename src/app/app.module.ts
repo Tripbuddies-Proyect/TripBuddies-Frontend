@@ -56,6 +56,7 @@ import {NotificationTravellerDialogComponent} from "./travellers/pages/home-trav
 import {MatListModule} from "@angular/material/list";
 import { PlacesSearchComponent } from './travellers/pages/places-search/places-search.component';
 import { ReviewsPlacesComponent } from './travellers/pages/places-search/reviews-places/reviews-places.component';
+import {CdkColumnDef} from "@angular/cdk/table";
 
 @NgModule({
   declarations: [
@@ -122,7 +123,9 @@ import { ReviewsPlacesComponent } from './travellers/pages/places-search/reviews
     MatNativeDateModule,
     MatListModule
   ],
-  providers: [],
+  providers: [
+    CdkColumnDef
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
