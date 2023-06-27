@@ -63,6 +63,7 @@ export class HomeTravellerComponent implements OnInit {
     this.userService.GetTravellerById(this.UserId).subscribe(
       (data: any) => {
         this.friendship.user_id = data;
+        console.log(data);
       });
     this.userService.AddMatch(this.UserId, this.friendship).subscribe(
       (data: any) => {

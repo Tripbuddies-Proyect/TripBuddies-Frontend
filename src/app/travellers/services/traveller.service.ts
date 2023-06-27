@@ -47,8 +47,8 @@ export class TravellerService {
       .get<Traveller>(`${this.baseURL}/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
-  AddFavorite(id:number, fav: Favorite): Observable<Favorite>{
-    return this.http.post<Favorite>(`${this.favoriteURL}/${id}`,JSON.stringify(fav), this.httpOptions)
+  AddFavorite(id:number, fav: any): Observable<Favorite>{
+    return this.http.post<Favorite>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/favorites/${id}`,JSON.stringify(fav), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   UpdateTraveller(traveller: Traveller): Observable<Traveller>{

@@ -11,6 +11,7 @@ import {MessageDialogComponent} from "../messages-traveller/message-dialog/messa
 import {
   NotificationDialogComponent
 } from "../../../bussiness/pages/home-bussiness/notification-dialog/notification-dialog.component";
+import {Favorite} from "../../models/favorite";
 
 @Component({
   selector: 'app-places-search',
@@ -29,6 +30,7 @@ export class PlacesSearchComponent implements OnInit {
   reviewForm: FormGroup;
   users : Traveller;
   UserId: number = 0;
+  favorite: Favorite;
   placeId: any; // Cambiado el nombre a PlaceId en lugar de PlaceID
   @ViewChild('editDialog') editDialog!: TemplateRef<any>;
   @ViewChild('addReview') addReview!: TemplateRef<any>;
@@ -45,6 +47,7 @@ export class PlacesSearchComponent implements OnInit {
     this.review = {} as Review;
     this.place = {} as Places;
     this.users = { } as Traveller;
+    this.favorite = {} as Favorite;
     this.reviewForm = this.formBuilder.group({
       reviewText: ['', [Validators.required, Validators.maxLength(500)]]
     });
@@ -92,11 +95,28 @@ export class PlacesSearchComponent implements OnInit {
   SendMessageToBussines(id:any){
 
   }
-  addToFavorites(model: any) {
-    this.placeService.AddFavorite(this.UserId,model).subscribe((response:any)=>
-    {
+  addToFavorites(id: number) {
+    this.placeService.GetPlacesById(id).subscribe(
+      (response: any) => {
+        this.favorite.places_Id = response;
+        console.log(response);
+      }
+    );
+    this.placeService.GetTravellerById(this.UserId).subscribe(
+      (response: any) => {
+        this.favorite.traveller_Id = response;
+        console.log(response);
+      }
+    );
+    this.placeService.AddFavorite(this.UserId,this.favorite).subscribe(
+      (response:any)=> {
+      this.favorite = response
       console.log(response);
-    });
+      console.log("Agregado a favoritos")
+    },
+      error => {
+      console.error('Error al agregar a favoritos:', error)
+      });
   }
   deleteFavorite(id:any){
     this.placeService.DeleteFavorite(id).subscribe(
