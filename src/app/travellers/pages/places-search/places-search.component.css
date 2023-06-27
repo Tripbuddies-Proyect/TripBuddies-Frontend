@@ -3,6 +3,8 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  background-image: url("https://th.bing.com/th/id/R.d810260d3b3c97094079a3c0f67d7d0d?rik=aJoHfFjfGHWC5g&riu=http%3a%2f%2fsalirdelpais.com%2fwp-content%2fuploads%2f2017%2f09%2fCuatro-curiosidades-que-te-sorprender%c3%a1n-sobre-viajar-en-avi%c3%b3n-salir-del-pais.jpg&ehk=d9ffYExxB5shYr7EZDTk3bearqXiAjRjBRL5cLx8Dts%3d&risl=&pid=ImgRaw&r=0");
+  background-size: cover;
 }
 
 .option {
@@ -97,6 +99,20 @@ th {
   width: 50px;
   height: 50px; /* Ajusta el tamaño según tus necesidades */
 }
+.map-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.map-image img {
+  max-width: 70%;
+  height: auto;
+  border-radius: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .mat-table-responsive {
   overflow-x: auto;
 }

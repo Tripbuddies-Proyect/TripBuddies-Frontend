@@ -10,6 +10,9 @@
     <h3>Ver todos los lugares</h3>
     <button mat-raised-button color="primary" (click)="openAllPlaces()">Ver todos</button>
   </div>
+  <div class="map-image">
+    <img src="https://th.bing.com/th/id/R.64dbf9d2ca128a1b2b8cbe781874fb1e?rik=lP7GEkO76xzOQA&riu=http%3a%2f%2fcdn.wccftech.com%2fwp-content%2fuploads%2f2017%2f03%2fGoogle-Maps.jpg&ehk=xcHOr5BQ%2b6aPyq162KQL96IhP1d6RiHUqhGvH5Zu7xg%3d&risl=&pid=ImgRaw&r=0" alt="Google Maps" />
+  </div>
   <ng-template #locationAll>
     <div class="results mat-table-responsive" *ngIf="places.length > 0">
       <table mat-table [dataSource]="places" class="mat-elevation-z8">
@@ -57,7 +60,6 @@
         <tr mat-row *matRowDef="let place; columns: displayedColumns;"></tr>
       </table>
     </div>
-
   </ng-template>
   <ng-template #placesAll>
     <div class="results mat-table-responsive" *ngIf="places.length > 0">
@@ -87,9 +89,9 @@
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell *matCellDef="let place">
             <button mat-icon-button color="warn" (click)="addToFavorites(place.id)">
-              <mat-icon>favorite</mat-icon>
+              <mat-icon > favorite</mat-icon>
             </button>
-            <button mat-icon-button color="warn" (click)="addToFavorites(place.id)">
+            <button mat-icon-button color="warn" (click)="SendMessageToBussines(place.bussiness.id)">
               <mat-icon>message</mat-icon>
             </button>
           </td>
@@ -144,19 +146,21 @@
     <tr mat-row *matRowDef="let review; columns: displayedColumns2;"></tr>
   </table>
 </ng-template>
-
 <ng-template #addReview>
   <div class="create-review">
     <h3>Escribir nueva reseña</h3>
-    <form [formGroup]="reviewForm">
-      <mat-form-field>
-        <mat-label>Reseña</mat-label>
-        <textarea matInput formControlName="reviewText" maxlength="500"></textarea>
-        <mat-hint align="end">{{ reviewForm.get('reviewText')?.value?.length }}/500 caracteres</mat-hint>
-      </mat-form-field>
-      <div class="edit-buttons">
-        <button mat-raised-button color="primary" [disabled]="reviewForm.get('reviewText')?.value?.length === 0" (click)="createReview(review.places.id)">Crear reseña</button>
-        <button mat-raised-button color="warn" (click)="closeEditDialog()">Cancelar</button>
+    <form (submit)="onSubmit()" #ReviewsForm="ngForm">
+      <div class="container">
+        <div class="content_title">
+          <h1 class="title">Add Reviews the Places</h1>
+        </div>
+        <mat-form-field appearance="fill"> <!-- placeholder: lo que se pondrá de titulo -->
+          <mat-label>Review</mat-label>
+          <input type="text" matInput placeholder="Review" name="Review" required [(ngModel)]="review.reviewText">
+        </mat-form-field>
+
+        <button mat-button class="edit" (click)="add()">Add</button> &nbsp;
+        <button mat-button class="edit" >Cancel</button> &nbsp;
       </div>
     </form>
   </div>

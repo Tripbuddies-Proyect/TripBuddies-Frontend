@@ -18,13 +18,19 @@ import {Friendship} from "../../models/friendship";
 })
 export class HomeTravellerComponent implements OnInit {
   travellers: Traveller[] = [];
-  friendship!: Friendship
+  friendship: Friendship
   presses: boolean = false;
   counter: number = 1;
-  constructor(private userService: TravellerService, private dialog: MatDialog) { }
+  UserId: number = 0;
+  Notf: any = NotificationTravellerDialogComponent;
+  answer: string = "";
+  constructor(private userService: TravellerService, private dialog: MatDialog) {
+    this.friendship = {} as Friendship;
+  }
 
   ngOnInit() {
     const id = toInteger(localStorage.getItem('id'));
+    this.UserId = id;
     this.getTravellers(id);
   }
 
@@ -47,8 +53,18 @@ export class HomeTravellerComponent implements OnInit {
       this.removeFriend(traveller);
     }
   }
-  addMatch(traveller: number) {
-    this.userService.AddMatch(traveller).subscribe(
+  addMatch(id: number) {
+    this.userService.GetTravellerById(id).subscribe(
+      (data: any) => {
+        this.friendship.friend = data;
+        console.log(data);
+      }
+    );
+    this.userService.GetTravellerById(this.UserId).subscribe(
+      (data: any) => {
+        this.friendship.user_id = data;
+      });
+    this.userService.AddMatch(this.UserId, this.friendship).subscribe(
       (data: any) => {
         this.friendship= data
         console.log(data);
@@ -59,6 +75,7 @@ export class HomeTravellerComponent implements OnInit {
         console.error('Error al añadir el match:', error);
       }
     );
+    this.sendNotification(this.friendship.friend.id);
   }
   removeFriend(traveller: Traveller) {
     this.userService.DeleteMatch(traveller.id).subscribe(
@@ -79,5 +96,24 @@ export class HomeTravellerComponent implements OnInit {
     this.dialog.open(NotificationTravellerDialogComponent, {
       data: id,
     });
+  }
+  sendNotification(data: any) {
+    let TempAnswer: object = {
+      "id": 0,
+      "content": "This user did match with you!",
+      "date": "2022-11-19T19:53:42.582Z",
+      "emitter": {
+        "id": this.UserId
+      },
+      "receiver": {
+        "id": data
+      }
+    };
+
+    this.userService.SendNotification(TempAnswer, this.UserId, data ).subscribe(response => {
+      console.log(response);
+    });
+
+    this.answer = "";
   }
 }

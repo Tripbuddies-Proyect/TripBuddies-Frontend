@@ -1,11 +1,8 @@
 <div class="main-div">
-  <label class="title">Send Notification</label>
+  <label class="title">Congrats! You matched with this user!</label>
   <div class="spacer"></div>
   <div class="answer">
-    <mat-form-field appearance="fill" style="width: calc(100% - 40px);">
-      <textarea matInput (keydown.enter)="SendNotification(data)" [(ngModel)]='answer'></textarea>
-    </mat-form-field>
-    <button mat-icon-button (click)="SendNotification(data)">
+    <button mat-icon-button (click)="sendNotification(data)">
       <mat-icon>send</mat-icon>
     </button>
   </div>

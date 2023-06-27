@@ -9,7 +9,6 @@ export interface Traveller {
   description:string,
   image:string,
   bannerImage:string,
-  adreess:string,
   email:string,
   password:string,
   phone:string,

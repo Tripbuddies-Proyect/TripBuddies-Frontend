@@ -47,8 +47,8 @@ export class TravellerService {
       .get<Traveller>(`${this.baseURL}/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
-  AddFavorite(fav: Favorite): Observable<Favorite>{
-    return this.http.post<Favorite>(this.favoriteURL,JSON.stringify(fav), this.httpOptions)
+  AddFavorite(id:number, fav: Favorite): Observable<Favorite>{
+    return this.http.post<Favorite>(`${this.favoriteURL}/${id}`,JSON.stringify(fav), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   UpdateTraveller(traveller: Traveller): Observable<Traveller>{
@@ -60,8 +60,8 @@ export class TravellerService {
     return this.http.get<Places>(this.placesURL, this.httpOptions).
     pipe(retry(2), catchError(this.handleError));
   }
-  AddMatch(id: number): Observable<Object>{
-    return this.http.post<Object>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/friendship/${id}`, this.httpOptions)
+  AddMatch(id: number, friend: any): Observable<Friendship>{
+    return this.http.post<Friendship>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/friendship/${id}`, JSON.stringify(friend), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   //Messagess
@@ -138,5 +138,17 @@ export class TravellerService {
   searchPlacesByLocation(searchLocation: any): Observable<any>{
     return this.http.get<any>(`${this.findPlacesURL}/${searchLocation}`, this.httpOptions)
       .pipe(retry(2),catchError(this.handleError));
+  }
+
+  GetPlacesById(id: any): Observable<any> {
+    return this.http.get<any>(`${this.placesURL}/${id}`, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+
+  }
+
+  GetFavoriteById(id: any): Observable<any> {
+    return this.http.get<any>(`${this.favoriteURL}/travellerId/${id}`, this.httpOptions)
+      .pipe( retry(2), catchError(this.handleError));
+
   }
 }
