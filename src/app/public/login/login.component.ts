@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit{
 
   goUserBussiness(id : any) {
     localStorage.setItem("id", id);
-    this.router.navigate(['/bussinesses/home']);
+    this.router.navigate(['/bussiness/home']);
   }
 
   verifyAccount() {

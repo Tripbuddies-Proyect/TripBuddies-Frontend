@@ -1,1 +1,21 @@
-<p>notification-bussiness works!</p>
+<div class="notification">
+
+  <mat-toolbar>
+    <span>Notifications</span>
+  </mat-toolbar>
+  <mat-card *ngFor="let notification of notifications" class="notification-header">
+    <mat-card-header>
+      <div mat-card-avatar> <img [src]="notification.emitter.image" alt="" class="avatar-header-image"> </div>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{notification.emitter.firstName + " " + notification.emitter.lastName}}</mat-card-title>
+      <mat-card-subtitle>{{notification.content}}<br></mat-card-subtitle>
+
+      <span class="spacer"></span>
+      <button mat-button class="notification-button" (click)="DeleteNotificationById(notification.id)">
+        <mat-icon style="color:white">delete</mat-icon>
+      </button>
+    </mat-card-header>
+  </mat-card>
+
+
+</div>

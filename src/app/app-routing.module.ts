@@ -23,6 +23,7 @@ import {
 import {MessagesBussinessComponent} from "./bussiness/pages/messages-bussiness/messages-bussiness.component";
 import {PlansBussinessComponent} from "./bussiness/pages/plans-bussiness/plans-bussiness.component";
 import {ProfileBussinessComponent} from "./bussiness/pages/profile-bussiness/profile-bussiness.component";
+import {BusinessComponent} from "./bussiness/pages/business/business.component";
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -45,7 +46,7 @@ const routes: Routes = [
 
   },
   {
-    path:'bussiness', component: BussinessComponent, children: [
+    path:'bussiness', component: BusinessComponent, children: [
         {path:'home', component: HomeBussinessComponent},
         {path: 'notifications', component: NotificationBussinessComponent},
         { path: 'messages', component: MessagesBussinessComponent },

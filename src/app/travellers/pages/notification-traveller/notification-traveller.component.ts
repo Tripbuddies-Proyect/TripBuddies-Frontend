@@ -11,7 +11,7 @@ import {toInteger} from "lodash";
 export class NotificationTravellerComponent implements OnInit{
 
   UserId:number = 0;
-  Developer: any;
+  Traveller: any;
   notifications:Array<any> = [];
   constructor(private service: TravellerService, private breakpoint: BreakpointObserver) { }
 

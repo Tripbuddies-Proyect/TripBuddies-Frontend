@@ -39,7 +39,6 @@ export class DataServiceService {
     return this.http.get<TravellerComponent>(`${this.travellerURL}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
-
   getBussinessAll(): Observable<Bussiness>{
     return this.http.get<Bussiness>(`${this.bussinessURL}`, this.httpOptions).
     pipe( retry(2), catchError(this.handleError));
@@ -74,7 +73,7 @@ export class DataServiceService {
       .post<Traveller>(this.travellerURL, traveller, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
-  postBussiness(bussiness: Traveller): Observable<Bussiness> {
+  postBussiness(bussiness: Bussiness): Observable<Bussiness> {
     return this.http
       .post<Bussiness>(this.bussinessURL, bussiness, this.httpOptions)
       .pipe(catchError(this.handleError));

@@ -11,14 +11,17 @@ import {DialogBoxInvalidFormComponent} from "../dialog-box-invalid-form/dialog-b
   templateUrl: './bussiness.component.html',
   styleUrls: ['./bussiness.component.css']
 })
-export class BussinessComponent implements OnInit{
-  registered:boolean = false;
-  Bussiness: Bussiness;
-  pass: String = '';
-  registerForm!:FormGroup;
+export class BussinessComponent implements OnInit {
 
-  constructor(private service: DataServiceService, private formBuilder:FormBuilder, public dialog:MatDialog, private rooter:Router) {
-    this.Bussiness = {} as Bussiness;
+  registered: boolean = false;
+  TempComp: Bussiness;
+  pass:string = "";
+  registerForm!: FormGroup;
+
+  constructor(private service: DataServiceService, private formBuilder: FormBuilder, public dialog: MatDialog, private router: Router) {
+
+    this.TempComp = {} as Bussiness;
+
     this.registerForm = this.formBuilder.group({
         first_name: new FormControl('', { validators:  [Validators.required], updateOn: 'change' }),
         last_name: new FormControl('', { validators:  [Validators.required], updateOn: 'change' }),
@@ -40,26 +43,32 @@ export class BussinessComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.setEmailValidation();
+    this. setPhoneValidation();
+    this.setPaswordValidation();
   }
+
   Add(){
-    this.Bussiness.address = this.registerForm.get('address')?.value;
-    this.Bussiness.city = this.registerForm.get('city')?.value;
-    this.Bussiness.country = this.registerForm.get('country')?.value;
-    this.Bussiness.description =  'I am a company';
-    this.Bussiness.email =  this.registerForm.get('email')?.value;
-    this.Bussiness.firstName =  this.registerForm.get('first_name')?.value;
-    this.Bussiness.image = 'https://th.bing.com/th/id/R.feeb8cd8f312940ec0e4c69bb3904182?rik=ilA8Fn%2bVK%2bJ23A&riu=http%3a%2f%2fwww.diasa.com.mx%2fwp-content%2fuploads%2f2016%2f05%2fFondo-Blanco-Plateado-Para-Banner.jpg&ehk=G%2bnzqrPimb866R5mhPcBLtZolFHDH4kIx5cb98of9pY%3d&risl=&pid=ImgRaw&r=0';
-    this.Bussiness.lastName =  this.registerForm.get('last_name')?.value;
-    this.Bussiness.name=  this.registerForm.get('bussiness_name')?.value;
-    this.Bussiness.owner =  this.registerForm.get('owner_name')?.value;
-    this.Bussiness.password =  this.registerForm.get('password')?.value;
-    this.Bussiness.phone =  this.registerForm.get('phone')?.value;
-    this.Bussiness.role =  'bussiness';
-    this.Bussiness.ruc =  this.registerForm.get('ruc')?.value;
-    this.service.postBussiness(this.Bussiness).subscribe((response:any) => {
-      console.log(this.Bussiness);
+    this.TempComp.address = this.registerForm.get('address')?.value;
+    this.TempComp.bannerImage = 'https://blog.vantagecircle.com/content/images/size/w1000/2019/03/7-Ways-to-Build-a-Strong-Company-Culture.png';
+    this.TempComp.city = this.registerForm.get('city')?.value;
+    this.TempComp.country = this.registerForm.get('country')?.value;
+    this.TempComp.description =  'I am a recruiter';
+    this.TempComp.email =  this.registerForm.get('email')?.value;
+    this.TempComp.firstName =  this.registerForm.get('first_name')?.value;
+    this.TempComp.image = 'https://d500.epimg.net/cincodias/imagenes/2016/07/04/lifestyle/1467646262_522853_1467646344_noticia_normal.jpg';
+    this.TempComp.lastName =  this.registerForm.get('last_name')?.value;
+    this.TempComp.name=  this.registerForm.get('company_name')?.value;
+    this.TempComp.owner =  this.registerForm.get('owner_name')?.value;
+    this.TempComp.password =  this.registerForm.get('password')?.value;
+    this.TempComp.phone =  this.registerForm.get('phone')?.value;
+    this.TempComp.role =  'bussiness';
+    this.TempComp.ruc =  this.registerForm.get('ruc')?.value;
+    this.service.postBussiness(this.TempComp).subscribe((response:any) => {
+      console.log(this.TempComp);
     });
   }
+
   openDialog() {
     if (this.registerForm.invalid) {
       if(this.registerForm.get('password')?.value !== this.registerForm.get('password_confirm')?.value) {
@@ -74,13 +83,13 @@ export class BussinessComponent implements OnInit{
       }
     }
     else {
-      this.verifyBussinessrUnregistered();
+      this.verifyDeveloperUnregistered();
       if(!this.registered) {
         this.Add();
         this.dialog.open(DialogBoxInvalidFormComponent, {
           data: {message: 'You have successfully registered!'},
         });
-        this.rooter.navigate(['/login']);
+        this.router.navigate(['/login']);
       }
       else {
         this.dialog.open(DialogBoxInvalidFormComponent, {
@@ -115,7 +124,7 @@ export class BussinessComponent implements OnInit{
   }
 
   get company_name() {
-    return this.registerForm.get('bussiness_name');
+    return this.registerForm.get('company_name');
   }
 
   get ruc() {
@@ -137,6 +146,8 @@ export class BussinessComponent implements OnInit{
   get city() {
     return this.registerForm.get('city');
   }
+
+
   setEmailValidation() {
     const emailControl = this.registerForm.get('email');
     //Default validation
@@ -181,6 +192,7 @@ export class BussinessComponent implements OnInit{
       }
     };
   }
+
   setPaswordValidation() {
     const passwordControl = this.registerForm.get('password');
 
@@ -193,10 +205,10 @@ export class BussinessComponent implements OnInit{
       this.registerForm.get('password')?.updateValueAndValidity();
     });
   }
-  verifyBussinessrUnregistered() {
+  verifyDeveloperUnregistered() {
     this.registered = false;
     var req = new XMLHttpRequest();
-    req.open('GET', `tripbuddieswebservice-production.up.railway.app/api/v1/users/searchByEmail/${this.registerForm.get("email")?.value}`, false);
+    req.open('GET', `https://stacksource.azurewebsites.net/api/v1/users/searchByEmail/${this.registerForm.get("email")?.value}`, false);
     req.send(null);
     if (req.status == 200) {
       var user = JSON.parse(req.responseText);
