@@ -16,6 +16,13 @@ import {FavoritesTravellerComponent} from "./travellers/pages/favorites-travelle
 import {MatchsTravellerComponent} from "./travellers/pages/matchs-traveller/matchs-traveller.component";
 import {PlacesSearchComponent} from "./travellers/pages/places-search/places-search.component";
 import {ReviewsPlacesComponent} from "./travellers/pages/places-search/reviews-places/reviews-places.component";
+import {HomeBussinessComponent} from "./bussiness/pages/home-bussiness/home-bussiness.component";
+import {
+  NotificationBussinessComponent
+} from "./bussiness/pages/notification-bussiness/notification-bussiness.component";
+import {MessagesBussinessComponent} from "./bussiness/pages/messages-bussiness/messages-bussiness.component";
+import {PlansBussinessComponent} from "./bussiness/pages/plans-bussiness/plans-bussiness.component";
+import {ProfileBussinessComponent} from "./bussiness/pages/profile-bussiness/profile-bussiness.component";
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -36,6 +43,15 @@ const routes: Routes = [
       {path: 'reviews', component: ReviewsPlacesComponent},
   ]
 
+  },
+  {
+    path:'bussiness', component: BussinessComponent, children: [
+        {path:'home', component: HomeBussinessComponent},
+        {path: 'notifications', component: NotificationBussinessComponent},
+        { path: 'messages', component: MessagesBussinessComponent },
+      {path: 'plans', component: PlansBussinessComponent},
+      {path:  'profile', component: ProfileBussinessComponent},
+      ]
   },
   { path: '**', component: PageNotfoundComponent },
 

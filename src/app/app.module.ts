@@ -57,6 +57,7 @@ import {MatListModule} from "@angular/material/list";
 import { PlacesSearchComponent } from './travellers/pages/places-search/places-search.component';
 import { ReviewsPlacesComponent } from './travellers/pages/places-search/reviews-places/reviews-places.component';
 import {CdkColumnDef} from "@angular/cdk/table";
+import { BusinessComponent } from './bussiness/pages/business/business.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import {CdkColumnDef} from "@angular/cdk/table";
     MessageDialogComponent,
     NotificationTravellerDialogComponent,
     PlacesSearchComponent,
-    ReviewsPlacesComponent
+    ReviewsPlacesComponent,
+    BusinessComponent
   ],
   imports: [
     BrowserModule,
