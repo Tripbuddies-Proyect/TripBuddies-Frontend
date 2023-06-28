@@ -5,7 +5,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Traveller} from "../../../travellers/models/traveller";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
-import {toInteger} from "lodash";
 import {ServiceService} from "../../service/service.service";
 import {BussinessComponent} from "../../model/bussiness";
 import {MatTable, MatTableDataSource} from "@angular/material/table";
@@ -72,7 +71,9 @@ export class HomeBussinessComponent implements OnInit{
 
 
   delete(id:any){
-    this.HttpDataServices.DeletePlace(id).subscribe();
+    this.HttpDataServices.DeletePlace(id).subscribe((response: any) =>{
+    });
+    location.reload();
   }
 
 }
