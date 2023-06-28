@@ -1,1 +1,66 @@
-<p>profile-bussiness works!</p>
+<body>
+<section class="seccion-perfil-usuario">
+  <div class="perfil-usuario-header">
+    <div class="perfil-usuario-portada">
+      <img src="{{traveller.bannerImage}}" alt="img-portada">
+      <div class="perfil-usuario-avatar">
+        <img src="{{traveller.image}}" alt="img-avatar">
+      </div>
+    </div>
+  </div>
+  <div class="perfil-usuario-body">
+    <div class="perfil-usuario-bio">
+      <mat-label class="titulo">{{traveller.firstName}} {{traveller.lastName}}</mat-label>
+      <p class="texto">{{traveller.description}}</p>
+    </div>
+    <div class="perfil-usuario-footer">
+      <ul class="lista-datos">
+        <li><mat-icon>phone</mat-icon> Telefono: {{traveller.phone}}</li>
+        <li><mat-icon>home</mat-icon> Direccion de usuario:{{traveller.address}}</li>
+        <li><mat-icon>phone</mat-icon> Telefono:{{traveller.phone}}</li>
+        <li><mat-icon>apartment</mat-icon> Ciudad:{{traveller.city}}</li>
+      </ul>
+      <ul class="lista-datos">
+        <li><mat-icon>mail</mat-icon> <a class="titlea">Email: </a>{{traveller.email}}</li>
+        <li><mat-icon>pallet</mat-icon>  <a class="title-icon"> Ruc:</a>{{traveller.ruc}}</li>
+        <li><mat-icon>person </mat-icon > <a class="title-icon">Owner:</a>{{traveller.owner}}</li>
+        <li><mat-icon>spa</mat-icon ><a class="title-icon">Role:</a>{{traveller.role}}</li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <button class="edit" mat-flat-button (click)="openEditDialog()">Edit</button>
+  </div>
+</section>
+</body>
+
+<ng-template #editDialog>
+  <div class="edit-dialog">
+    <h2>Editar perfil</h2>
+    <mat-form-field>
+      <label>Descripción</label>
+      <textarea matInput [(ngModel)]="traveller.description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <label>Celular</label>
+      <input matInput type="text" [(ngModel)]="traveller.phone" />
+    </mat-form-field>
+    <mat-form-field>
+      <label>Imagen de perfil</label>
+      <input matInput type="text" [(ngModel)]="traveller.image" />
+    </mat-form-field>
+    <mat-form-field>
+      <label>Correo electrónico</label>
+      <input matInput type="email" [(ngModel)]="traveller.email" />
+    </mat-form-field>
+    <mat-form-field>
+      <label>Contraseña</label>
+      <input matInput type="password" [(ngModel)]="traveller.password" />
+    </mat-form-field>
+    <div class="edit-buttons">
+      <button mat-raised-button color="primary" [disabled]="traveller.description.length ===0 && traveller.phone.length ===0 &&
+      traveller.image.length ===0 && traveller.email.length ===0  && traveller.password.length ===0 " (click)="saveChanges()">Guardar cambios</button>
+      <button mat-raised-button color="warn" (click)="closeEditDialog()">Cancelar</button>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,28 @@
+.plan{
+  max-width: 500px;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.check-list {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.check-list li:before {
+  content: "\2713";
+  color: green;
+  font-size: 1.2em;
+  margin-right: 10px;
+}
+.card-title{
+  padding-bottom: 15px;
+}
+
+.mat-custom-color {
+  background-color: #694c41;
+  color: white;
+}

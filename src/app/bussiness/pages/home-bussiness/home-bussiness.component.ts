@@ -58,8 +58,6 @@ export class HomeBussinessComponent implements OnInit{
 
   }
 
-
-
   getUserBussiness(id:any){
     this.BussinessService.GetBussinessById(id).subscribe((response:any)=>{
       this.User=response;

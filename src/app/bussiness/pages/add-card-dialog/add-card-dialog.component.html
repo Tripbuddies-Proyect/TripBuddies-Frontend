@@ -1,1 +1,40 @@
-<p>add-card-dialog works!</p>
+<h2 mat-dialog-title>Añadir Tarjeta de Crédito</h2>
+<mat-dialog-content>
+
+
+  <form class="example-form" layout="grid">
+    <div class="example-row">
+      <mat-form-field appearance="fill" flex>
+        <mat-label>Número de tarjeta</mat-label>
+        <input matInput type="text" id="cardNumber" name="cardNumber" required>
+      </mat-form-field>
+    </div>
+
+    <div class="example-row">
+      <mat-form-field appearance="fill" flex>
+        <mat-label>Titular de la tarjeta</mat-label>
+        <input matInput type="text" id="cardHolder" name="cardHolder" required>
+      </mat-form-field>
+    </div>
+
+    <div class="example-row">
+      <mat-form-field appearance="fill" flex>
+        <mat-label>Fecha de vencimiento</mat-label>
+        <input matInput type="text" id="expiryDate" name="expiryDate" required>
+      </mat-form-field>
+    </div>
+
+    <div class="example-row">
+      <mat-form-field appearance="fill" flex>
+        <mat-label>CVV</mat-label>
+        <input matInput type="text" id="cvv" name="cvv" required>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button mat-dialog-close color="primary" type="submit">Enviar</button>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color = "warn">Cancelar</button>
+</mat-dialog-actions>
