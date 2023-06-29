@@ -69,7 +69,9 @@ export class ServiceService {
     post<object>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users/${userId}/messages/${contactId}`, answer, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
-
+  PostPlaces(id:number, places: Places): Observable<Places>{
+    return this.http.post<Places>(`${this.placesURL}/${id}`,JSON.stringify(places) ,this.httpOptions).pipe(retry(2), catchError(this.handleError));
+  }
   //Notification
   GetNotificationsByUserId(id:number, userId: number): Observable<object>{
     return this.http.get<object>(`${this.basicUserURL}/${userId}/notifications/${id}`, this.httpOptions).
@@ -87,5 +89,12 @@ export class ServiceService {
   DeleteNotificationById(id: number, userId: number): Observable<object>{
     return this.http.delete<object>(`${this.basicUserURL}/${userId}/notifications/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
+  }
+
+  GetPlaceByid(id:number){
+    return this.http.get<any>(`${this.placesURL}/${id}`, this.httpOptions).pipe(retry(2), catchError(this.handleError));
+  }
+  GetReviewPlaceId(id: number): Observable<any>{
+    return this.http.get<any>(`${this.ReviewPlacesURL}/${id}`, this.httpOptions).pipe(retry(2), catchError(this.handleError));
   }
 }

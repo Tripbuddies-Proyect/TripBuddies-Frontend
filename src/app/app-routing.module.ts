@@ -52,6 +52,7 @@ const routes: Routes = [
         { path: 'messages', component: MessagesBussinessComponent },
       {path: 'plans', component: PlansBussinessComponent},
       {path:  'profile', component: ProfileBussinessComponent},
+
       ]
   },
   { path: '**', component: PageNotfoundComponent },

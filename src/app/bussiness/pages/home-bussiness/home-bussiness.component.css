@@ -11,6 +11,10 @@ table{
   width: 100%;
 }
 
+.table-image{
+  width: 100px;
+  height: 100px;
+}
 .ContentHeader {
   display: flex;
   flex-direction: column;
@@ -82,4 +86,34 @@ button.options-toolbar {
 
 button.options-toolbar:hover {
   background-color: #0056b3;
+}
+/* place-form.component.css */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form {
+  width: 300px;
+  height: 400px;
+  padding: -100px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button {
+  width: 50%;
 }

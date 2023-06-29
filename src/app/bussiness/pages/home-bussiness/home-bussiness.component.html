@@ -5,7 +5,7 @@
       Hello {{User.firstName}} {{User.lastName}}
     </h1>
     <p>En la siguiente tabla tienes todos los lugares agregados de  su negocio:</p>
-    <button class="options-toolbar button-toolbar" [routerLink]="['/bussiness/places/add',User.id]" >Add Place</button>
+    <button class="options-toolbar button-toolbar" (click)="openAddPlaceDialog()">Add Place</button>
   </div>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -44,20 +44,129 @@
       <td mat-cell *matCellDef="let element"> {{element.price}} </td>
     </ng-container>
     <ng-container matColumnDef="imagenurl">
-      <th mat-header-cell *matHeaderCellDef> imagenurl </th>
-      <td mat-cell *matCellDef="let element"><img src={{element.imagenurl}}>  </td>
+      <th mat-header-cell *matHeaderCellDef> imagen </th>
+      <td mat-cell *matCellDef="let element"><img class="table-image" src="{{element.imageUrl}}">  </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> action </th>
       <td mat-cell *matCellDef="let element">
 
-        <button mat-raised-button color="primary" (click)="UpdateButton(element)">Update</button>
+        <button mat-raised-button color="primary" (click)="openEditDialog(element)"   >Update</button>
         <button mat-stroked-button color="warn" (click)="DeleteButton(element)">Delete</button>
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="reviews">
+      <th mat-header-cell *matHeaderCellDef> review </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" (click)="OpenReviewsDialog(element)"   >Review</button>
+      </td>
+    </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  <ng-template #editDialog>
+    <div class="edit-dialog">
+      <h2>View Reviews</h2>
+      <mat-form-field>
+        <label>name</label>
+        <textarea matInput [(ngModel)]="PlacesData.name"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <label>description</label>
+        <input matInput type="text" [(ngModel)]="PlacesData.description" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>location</label>
+        <input matInput type="text" [(ngModel)]="PlacesData.location" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>country</label>
+        <input matInput type="email" [(ngModel)]="PlacesData.country" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>price</label>
+        <input matInput type="text" [(ngModel)]="PlacesData.price" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>imageUrl</label>
+        <input matInput type="text" [(ngModel)]="PlacesData.imageUrl" />
+      </mat-form-field>
+
+      <div class="edit-buttons">
+        <button mat-raised-button color="primary" [disabled]="PlacesData.name.length ===0 && PlacesData.description.length ===0 &&
+      PlacesData.location.length ===0 && PlacesData.country.length ===0  && PlacesData.price ===0 && PlacesData.imageUrl.length===0 " (click)="saveChanges()">Guardar cambios</button>
+        <button mat-raised-button color="warn" (click)="closeEditDialog()">Cancelar</button>
+      </div>
+    </div>
+  </ng-template>
+
+<ng-template #addPlaceDialog>
+  <!-- place-form.component.html -->
+  <form [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Name" required>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput formControlName="description" placeholder="Description" required></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="imageUrl" placeholder="Image URL" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" formControlName="price" placeholder="Price" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="location" placeholder="Location" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="country" placeholder="Country" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Create Place</button>
+  </form>
+
+</ng-template>
+
+
+
+  <ng-template #reviewDialog>
+    <table mat-table [dataSource]="dataSourceReview" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+      <!-- Name Column -->
+      <ng-container matColumnDef="FirstName">
+        <th mat-header-cell *matHeaderCellDef> First Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.traveller.firstName}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="LastName">
+        <th mat-header-cell *matHeaderCellDef> Last Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.traveller.lastName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="PlaceName">
+        <th mat-header-cell *matHeaderCellDef> Name Place </th>
+        <td mat-cell *matCellDef="let element"> {{element.places.name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="imagenurl">
+        <th mat-header-cell *matHeaderCellDef> imagen </th>
+        <td mat-cell *matCellDef="let element"><img class="table-image" src="{{element.places.imageUrl}}">  </td>
+      </ng-container>
+      <ng-container matColumnDef="Reviews">
+        <th mat-header-cell *matHeaderCellDef> Review </th>
+        <td mat-cell *matCellDef="let element"> {{element.reviewText}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumnsReview"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumnsReview;"></tr>
+    </table>
+  </ng-template>
+
+
 </div>
+
+

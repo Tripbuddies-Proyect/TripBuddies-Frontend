@@ -19,32 +19,41 @@ import {MatSort} from "@angular/material/sort";
   styleUrls: ['./home-bussiness.component.css']
 })
 export class HomeBussinessComponent implements OnInit{
-  @ViewChild(MatTable)
-  table!: MatTable<any>;
-
   UserId:any;
-  constructor(private router: Router,private HttpDataServices:ServiceService,private BussinessService:ServiceService) {
+  constructor(private dialog: MatDialog,private router: Router,private HttpDataServices:ServiceService,private BussinessService:ServiceService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
     this.PlacesData={} as Places;
     this.User={} as BussinessComponent;
+    this.placeForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      price: ['', Validators.required],
+      location: ['', Validators.required],
+      country: ['', Validators.required]
+    });
   }
   ngOnInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.UserId = Number(localStorage.getItem('id'));
+    console.log(this.UserId)
     this.getAllPlacesbyBussiness(this.UserId);
     this.getUserBussiness(this.UserId);
   }
   PlacesData:Places;
+  @ViewChild('editDialog') editDialog!: TemplateRef<any>;
+
+  @ViewChild('reviewDialog') reviewDialog!: TemplateRef<any>;
+
+  @ViewChild('addPlaceDialog') addPlaceDialog!: TemplateRef<any>;
+
+  placeForm: FormGroup;
 
   PlaceRow!:Places;
   User:BussinessComponent;
   dataSource=new MatTableDataSource();
-  displayedColumns:string[]=['id','name','description','location','country','price','imagenurl','actions'];
+  dataSourceReview=new MatTableDataSource();
+  displayedColumns:string[]=['id','name','description','location','country','price','imagenurl','actions','reviews'];
+  displayedColumnsReview:string[]=['FirstName','LastName','PlaceName','imagenurl','Reviews'];
 
-  @ViewChild(MatPaginator,{static:true})
-  paginator!: MatPaginator;
-  @ViewChild(MatSort)
-  sort!:MatSort;
 
   UpdateButton(element: any) {
     this.PlaceRow=element;
@@ -54,26 +63,60 @@ export class HomeBussinessComponent implements OnInit{
     this.PlaceRow=element;
     this.HttpDataServices.DeletePlace(element.id).subscribe();
     this.getAllPlacesbyBussiness(this.UserId);
+  }
+
+  OpenReviewsDialog(element:any){
+    this.HttpDataServices.GetReviewPlaceId(element.id).subscribe((response:any)=>{
+      console.log(response);
+      this.dataSourceReview.data=response;
+    })
+    this.dialog.open(this.reviewDialog);
+
+  }
+  openAddPlaceDialog(){
+    this.dialog.open(this.addPlaceDialog);
+  }
+  onSubmit() {
+    if (this.placeForm.valid) {
+      const placeData = this.placeForm.value;
+      this.BussinessService.PostPlaces(this.UserId, placeData).subscribe((response: any) => {
+      });
+    }
+  }
+  openEditDialog(element:any){
+    this.HttpDataServices.GetPlaceByid(element.id).subscribe((response:any)=>{
+      this.PlacesData=response;
+    });
+
+    this.dialog.open(this.editDialog);
+  }
+  saveChanges(){
+    this.HttpDataServices.UpdatePlace(this.PlacesData).subscribe((response: any ) => {console.log(response);
+    });
+    this.dialog.closeAll();
+  }
+
+  closeEditDialog(){
+    this.dialog.closeAll();
 
   }
 
   getUserBussiness(id:any){
-    this.BussinessService.GetBussinessById(id).subscribe((response:any)=>{
-      this.User=response;
+    this.BussinessService.GetBussinessById(id).subscribe((response) => {
+      this.User = response;
     })
   }
+
+
   getAllPlacesbyBussiness(Bussinessid:number){
     this.HttpDataServices.GetPlaceByBussinessId(Bussinessid).subscribe((response: any) =>{
       this.dataSource.data = response;
-      console.log(this.dataSource.data)
     });
   }
 
 
   delete(id:any){
-    this.HttpDataServices.DeletePlace(id).subscribe((response: any) =>{
-    });
-    location.reload();
+    this.HttpDataServices.DeletePlace(id).subscribe();
   }
 
 }
