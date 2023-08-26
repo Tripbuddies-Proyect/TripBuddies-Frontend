@@ -9,9 +9,9 @@ import {Traveller} from "../register/model/traveller";
   providedIn: 'root'
 })
 export class DataServiceService {
-  travellerURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/travellers";
-  bussinessURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/bussiness";
-  basePath = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users";
+  travellerURL = "http://localhost:7308/api/v1/travellers";
+  bussinessURL = "http://localhost:7308/api/v1/bussiness";
+  basePath = "http://localhost:7308/api/v1/users";
   friendIdURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/friendship/user";
   favoriteIdURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/favorites/travellerId/";
   constructor(private http: HttpClient) {}

@@ -52,6 +52,8 @@
   background-image: url("https://th.bing.com/th/id/R.e8aa0d6d79b90cc8749ad89d260c196c?rik=VHv7gmN5vSK4aQ&pid=ImgRaw&r=0");
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 100%;
+
 }
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
   .form-container {

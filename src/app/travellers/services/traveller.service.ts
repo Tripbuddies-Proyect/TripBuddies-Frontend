@@ -12,7 +12,7 @@ import {Review} from "../models/review";
 })
 export class TravellerService {
   basicUserURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users";
-  baseURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/travellers";
+  baseURL = "http://localhost:7308/api/v1/users";
   favoriteURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/favorites";
   matchURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/friendship";
   placesURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/places";
