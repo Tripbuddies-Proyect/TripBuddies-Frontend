@@ -8,12 +8,12 @@ import {Places} from "../model/places";
   providedIn: 'root'
 })
 export class ServiceService {
-  baseURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/bussiness";
-  PlaceByBussinessID = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/places/bussiness";
-  ReviewPlacesURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/reviews/places";
-  placesURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/places";
+  baseURL = "http://localhost:8080/api/v1/bussiness";
+  PlaceByBussinessID = "http://localhost:8080/api/v1/places/bussiness";
+  ReviewPlacesURL = "http://localhost:8080/api/reviews/places";
+  placesURL = "http://localhost:8080/api/v1/places";
 
-  basicUserURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users";
+  basicUserURL = "http://localhost:8080/api/v1/users";
 
   constructor(private http: HttpClient) { }
   httpOptions = {
@@ -56,17 +56,17 @@ export class ServiceService {
   }
   //Messagess
   GetContacts(userId: number): Observable<Object>{
-    return this.http.get<Object>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users/${userId}/messages/LastMessageBussiness`, this.httpOptions).
+    return this.http.get<Object>(`http://localhost:8080/api/v1/users/${userId}/messages/LastMessageBussiness`, this.httpOptions).
     pipe(retry(2), catchError(this.handleError));
   }
   GetMessages(contactId: number, UserId:number): Observable<object> {
     return this.http
-      .get(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users/${UserId}/messages/${contactId}`, this.httpOptions)
+      .get(`http://localhost:8080/api/v1/users/${UserId}/messages/${contactId}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   SendMessage(answer: Object, contactId: number, userId: number): Observable<object>{
     return this.http.
-    post<object>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users/${userId}/messages/${contactId}`, answer, this.httpOptions)
+    post<object>(`http://localhost:8080/api/v1/users/${userId}/messages/${contactId}`, answer, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   PostPlaces(id:number, places: Places): Observable<Places>{

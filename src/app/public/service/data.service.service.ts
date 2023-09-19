@@ -9,11 +9,11 @@ import {Traveller} from "../register/model/traveller";
   providedIn: 'root'
 })
 export class DataServiceService {
-  travellerURL = "http://localhost:7308/api/v1/travellers";
-  bussinessURL = "http://localhost:7308/api/v1/bussiness";
-  basePath = "http://localhost:7308/api/v1/users";
-  friendIdURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/friendship/user";
-  favoriteIdURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/favorites/travellerId/";
+  travellerURL = "http://localhost:8080/api/v1/travellers";
+  bussinessURL = "http://localhost:8080/api/v1/bussiness";
+  basePath = "http://localhost:8080/api/v1/users";
+  friendIdURL = "http://localhost:8080/api/v1/friendship/user";
+  favoriteIdURL = "http://localhost:8080/api/v1/favorites/travellerId/";
   constructor(private http: HttpClient) {}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     throw new Error('Method not implemented.');

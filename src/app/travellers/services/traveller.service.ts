@@ -11,15 +11,15 @@ import {Review} from "../models/review";
   providedIn: 'root'
 })
 export class TravellerService {
-  basicUserURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users";
-  baseURL = "http://localhost:7308/api/v1/users";
-  favoriteURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/favorites";
-  matchURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/friendship";
-  placesURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/places";
-  findPlacesURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/places/location";
-  PostReviewURL= "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/reviews/places"
-  ReviewURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/reviews";
-  ReviewPlacesURL = "https://tripbuddies-tourmates-webservice-production.up.railway.app/api/reviews/places";
+  basicUserURL = "http://localhost:8080/api/v1/users";
+  baseURL = "http://localhost:8080/api/v1/users";
+  favoriteURL = "http://localhost:8080/api/v1/favorites";
+  matchURL = "http://localhost:8080/api/v1/friendship";
+  placesURL = "http://localhost:8080/api/v1/places";
+  findPlacesURL = "http://localhost:8080/api/v1/places/location";
+  PostReviewURL= "http://localhost:8080/api/reviews/places"
+  ReviewURL = "http://localhost:8080/api/reviews";
+  ReviewPlacesURL = "http://localhost:8080/api/reviews/places";
   constructor(private http: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
@@ -48,7 +48,7 @@ export class TravellerService {
       .pipe(retry(2), catchError(this.handleError));
   }
   AddFavorite(id:number, fav: any): Observable<Favorite>{
-    return this.http.post<Favorite>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/favorites/${id}`,JSON.stringify(fav), this.httpOptions)
+    return this.http.post<Favorite>(`http://localhost:8080/api/v1/favorites/${id}`,JSON.stringify(fav), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   UpdateTraveller(traveller: Traveller): Observable<Traveller>{
@@ -61,22 +61,22 @@ export class TravellerService {
     pipe(retry(2), catchError(this.handleError));
   }
   AddMatch(id: number, friend: any): Observable<Friendship>{
-    return this.http.post<Friendship>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/friendship/${id}`, JSON.stringify(friend), this.httpOptions)
+    return this.http.post<Friendship>(`http://localhost:8080/api/v1/friendship/${id}`, JSON.stringify(friend), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   //Messagess
   GetContacts(userId: number): Observable<Object>{
-    return this.http.get<Object>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users/${userId}/messages/LastMessageTraveller`, this.httpOptions).
+    return this.http.get<Object>(`http://localhost:8080/api/v1/users/${userId}/messages/LastMessageTraveller`, this.httpOptions).
     pipe(retry(2), catchError(this.handleError));
   }
   GetMessages(contactId: number, UserId:number): Observable<object> {
     return this.http
-      .get(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users/${UserId}/messages/${contactId}`, this.httpOptions)
+      .get(`http://localhost:8080/api/v1/users/${UserId}/messages/${contactId}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   SendMessage(answer: Object, contactId: number, userId: number): Observable<object>{
     return this.http.
-      post<object>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users/${userId}/messages/${contactId}`, answer, this.httpOptions)
+      post<object>(`http://localhost:8080/api/v1/users/${userId}/messages/${contactId}`, answer, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   //Notification
@@ -99,7 +99,7 @@ export class TravellerService {
   }
   //--Notifications
   GetMatchByID(id: number): Observable<Object>{
-    return this.http.get<any>(`https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/friendship/user/${id}`, this.httpOptions).
+    return this.http.get<any>(`http://localhost:8080/api/v1/friendship/user/${id}`, this.httpOptions).
     pipe(retry(2), catchError(this.handleError));
   }
   DeleteMatch(id: number){

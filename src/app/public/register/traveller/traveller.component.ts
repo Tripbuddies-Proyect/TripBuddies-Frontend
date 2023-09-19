@@ -64,10 +64,10 @@ export class TravellerComponent implements OnInit{
       this.registerForm.get('password')?.updateValueAndValidity();
     });
   }
-  verifyTravellerUnregistered() {
+  /*verifyTravellerUnregistered() {
     this.registered = false;
     var req = new XMLHttpRequest();
-    req.open('GET', `https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/users/searchByEmail/${this.registerForm.get("email")?.value}`, false);
+    req.open('GET', `http://http://localhost:8080/api/v1/users/searchByEmail/${this.registerForm.get("email")?.value}`, false);
     req.send(null);
     if (req.status == 200) {
       var user = JSON.parse(req.responseText);
@@ -76,6 +76,8 @@ export class TravellerComponent implements OnInit{
       }
     }
   }
+  */
+
   setEmailValidation() {
     const emailControl = this.registerForm.get('email');
     //Default validation
@@ -114,7 +116,7 @@ export class TravellerComponent implements OnInit{
     this.TempTraveller.bannerImage = 'https://thumbs.dreamstime.com/b/internet-information-technology-businessman-hand-showing-concept-75784736.jpg';
 
     var req = new XMLHttpRequest();
-    req.open('POST', 'https://tripbuddies-tourmates-webservice-production.up.railway.app/api/v1/travellers', false);
+    req.open('POST', 'http://localhost:8080/api/v1/travellers', false);
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify(this.TempTraveller));
     console.log('Traveller added successfully!');
@@ -134,7 +136,7 @@ export class TravellerComponent implements OnInit{
       }
     }
     else {
-      this.verifyTravellerUnregistered();
+      //this.verifyTravellerUnregistered();
       if(!this.registered) {
         this.AddTraveller();
         this.dialog.open(DialogBoxInvalidFormComponent, {
