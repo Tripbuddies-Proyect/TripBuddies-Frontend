@@ -30,23 +30,33 @@
       <th mat-header-cell *matHeaderCellDef> description </th>
       <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
-    <ng-container matColumnDef="location">
-      <th mat-header-cell *matHeaderCellDef> location </th>
-      <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
     </ng-container>
-    <ng-container matColumnDef="country">
-      <th mat-header-cell *matHeaderCellDef> country </th>
-      <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+    <ng-container matColumnDef="hour">
+      <th mat-header-cell *matHeaderCellDef> hour </th>
+      <td mat-cell *matCellDef="let element"> {{element.hour}} </td>
+    </ng-container>
+    <ng-container matColumnDef="origen">
+      <th mat-header-cell *matHeaderCellDef> origen </th>
+      <td mat-cell *matCellDef="let element"> {{element.origen}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="destino">
+      <th mat-header-cell *matHeaderCellDef> destino </th>
+      <td mat-cell *matCellDef="let element"> {{element.destino}} </td>
+    </ng-container>
+    <ng-container matColumnDef="imageUrl">
+      <th mat-header-cell *matHeaderCellDef> imagen </th>
+      <td mat-cell *matCellDef="let element"><img class="table-image" src="{{element.imageUrl}}">  </td>
     </ng-container>
 
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef> price </th>
       <td mat-cell *matCellDef="let element"> {{element.price}} </td>
     </ng-container>
-    <ng-container matColumnDef="imagenurl">
-      <th mat-header-cell *matHeaderCellDef> imagen </th>
-      <td mat-cell *matCellDef="let element"><img class="table-image" src="{{element.imageUrl}}">  </td>
-    </ng-container>
+
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> action </th>
@@ -68,8 +78,46 @@
   </table>
 
   <ng-template #editDialog>
-    <div class="edit-dialog">
-      <h2>View Reviews</h2>
+    <form [formGroup]="placeUpdateForm" (ngSubmit)="saveChanges()">
+      <mat-form-field>
+        <h3>Name</h3>
+        <input matInput formControlName="name" placeholder="Name" [ngModel]="PlacesData.name" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>Description</h3>
+        <textarea matInput formControlName="description" placeholder="Description" [ngModel]="PlacesData.description"required></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>Date</h3>
+        <input matInput formControlName="Date" placeholder="24/02/23" [ngModel]="PlacesData.date" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>Hour</h3>
+        <input matInput  formControlName="Hour" placeholder="7:00 pm"  [ngModel]="PlacesData.hour"required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>Origen</h3>
+        <input matInput formControlName="origen" placeholder="Origen" [ngModel]="PlacesData.origen" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>Destino</h3>
+        <input matInput formControlName="destino" placeholder="Destino" [ngModel]="PlacesData.destino" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>Price</h3>
+        <input matInput formControlName="price" placeholder="Price"  [ngModel]="PlacesData.price" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>imageUrl</h3>
+        <input matInput formControlName="imageUrl" placeholder="imageUrl"  [ngModel]="PlacesData.imageUrl" required>
+      </mat-form-field>
+
+
+      <button mat-raised-button color="primary" type="submit" (click)="saveChanges()">Update</button>
+      <button mat-raised-button color="primary" type="submit" (click)="closeEditDialog()">Cancel</button>
+
+    </form>
+     <!-- <h2>View Reviews</h2>
       <mat-form-field>
         <label>name</label>
         <textarea matInput [(ngModel)]="PlacesData.name"></textarea>
@@ -79,51 +127,71 @@
         <input matInput type="text" [(ngModel)]="PlacesData.description" />
       </mat-form-field>
       <mat-form-field>
-        <label>location</label>
-        <input matInput type="text" [(ngModel)]="PlacesData.location" />
+        <label>date</label>
+        <input matInput type="text" [(ngModel)]="PlacesData.date" />
       </mat-form-field>
       <mat-form-field>
-        <label>country</label>
-        <input matInput type="email" [(ngModel)]="PlacesData.country" />
+        <label>hour</label>
+        <input matInput type="email" [(ngModel)]="PlacesData.hour" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>origen</label>
+        <input matInput type="text" [(ngModel)]="PlacesData.origen" />
+      </mat-form-field>
+      <mat-form-field>
+        <label>destino</label>
+        <input matInput type="text" [(ngModel)]="PlacesData.destino" />
       </mat-form-field>
       <mat-form-field>
         <label>price</label>
         <input matInput type="text" [(ngModel)]="PlacesData.price" />
       </mat-form-field>
-      <mat-form-field>
-        <label>imageUrl</label>
-        <input matInput type="text" [(ngModel)]="PlacesData.imageUrl" />
-      </mat-form-field>
 
       <div class="edit-buttons">
         <button mat-raised-button color="primary" [disabled]="PlacesData.name.length ===0 && PlacesData.description.length ===0 &&
-      PlacesData.location.length ===0 && PlacesData.country.length ===0  && PlacesData.price ===0 && PlacesData.imageUrl.length===0 " (click)="saveChanges()">Guardar cambios</button>
+      PlacesData.date.length ===0 && PlacesData.hour.length ===0  && PlacesData.price ===0 " (click)="saveChanges()">Guardar cambios</button>
         <button mat-raised-button color="warn" (click)="closeEditDialog()">Cancelar</button>
       </div>
-    </div>
+    -->
   </ng-template>
 
 <ng-template #addPlaceDialog>
   <!-- place-form.component.html -->
-  <form [formGroup]="placeForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="placeForm" >
     <mat-form-field>
+      <h3>Name</h3>
       <input matInput formControlName="name" placeholder="Name" required>
     </mat-form-field>
     <mat-form-field>
+      <h3>Description</h3>
       <textarea matInput formControlName="description" placeholder="Description" required></textarea>
     </mat-form-field>
     <mat-form-field>
-      <input matInput formControlName="imageUrl" placeholder="Image URL" required>
+      <h3>Date</h3>
+      <input matInput formControlName="Date" placeholder="24/02/23" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput type="number" formControlName="price" placeholder="Price" required>
+      <h3>Hour</h3>
+      <input matInput  formControlName="Hour" placeholder="7:00 pm" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput formControlName="location" placeholder="Location" required>
+      <h3>Origen</h3>
+      <input matInput formControlName="origen" placeholder="Origen" required>
     </mat-form-field>
     <mat-form-field>
-      <input matInput formControlName="country" placeholder="Country" required>
+      <h3>Destino</h3>
+      <input matInput formControlName="destino" placeholder="Destino" required>
     </mat-form-field>
+    <mat-form-field>
+      <h3>Price</h3>
+      <input matInput  formControlName="price" placeholder="Price" required>
+    </mat-form-field>
+    <mat-form-field>
+      <h3>imageUrl</h3>
+      <input matInput formControlName="imageUrl" placeholder="imageUrl" required>
+    </mat-form-field>
+
+
     <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Create Place</button>
   </form>
 

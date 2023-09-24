@@ -33,38 +33,30 @@
     <mat-form-field class="recruiter__password" appearance="fill">
       <mat-label>Password</mat-label>
       <input matInput type="password" name="password" formControlName="password"/>
-      <mat-error *ngIf="password?.errors?.['required']">Password is <strong>required</strong></mat-error>
-      <mat-error *ngIf="password?.errors?.['minlength']">At least 8 <strong>characters</strong></mat-error>
-      <mat-error *ngIf="password?.errors?.['maxlength']">Maximum 16 <strong>characters</strong></mat-error>
-      <mat-error *ngIf="password?.errors?.['pattern']">Should contain numbers and letters/special <strong>characters!</strong></mat-error>
-    </mat-form-field>
+       </mat-form-field>
 
     <mat-form-field class="recruiter__confirm-password" appearance="fill">
       <mat-label>Confirm Password</mat-label>
       <input matInput type="password" name="password_confirm" formControlName="password_confirm"/>
-      <mat-error *ngIf="password_confirm?.errors?.['required']">Password is <strong>required</strong></mat-error>
-      <mat-error *ngIf="password_confirm?.errors?.['minlength']">At least 8 <strong>characters</strong></mat-error>
-      <mat-error *ngIf="password_confirm?.errors?.['maxlength']">Maximum 16 <strong>characters</strong></mat-error>
-      <mat-error *ngIf="password_confirm?.errors?.['MustMatch']">Do not match <strong>password</strong></mat-error>
-    </mat-form-field>
+      </mat-form-field>
   </div>
 
   <div class="professional-info">
-    <h3>Enter information of your Bussiness</h3>
+    <h3>Enter information of your Carrier</h3>
 
     <mat-form-field appearance="fill">
-      <mat-label>Bussiness Name</mat-label>
-      <input matInput placeholder="Google" name="Bussiness_name" formControlName="company_name"/>
+      <mat-label>Marca de Automovil</mat-label>
+      <input matInput placeholder="Toyota" name="Bussiness_name" formControlName="Marca_name"/>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>RUC</mat-label>
-      <input matInput type="number" placeholder="Ex. 20552103816" name="ruc" formControlName="ruc"/>
+      <input matInput type="number" placeholder="Ex. 20552103816" name="ruc" formControlName="ruc_name"/>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Owner's Name</mat-label>
-      <input matInput placeholder="Ex. Evans" name="owner_name" formControlName="owner_name"/>
+      <mat-label>Plate</mat-label>
+      <input matInput placeholder="ABC-123" name="Plate_name" formControlName="Plate_name"/>
     </mat-form-field>
 
     <mat-form-field appearance="fill">

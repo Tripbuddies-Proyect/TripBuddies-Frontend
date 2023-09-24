@@ -30,9 +30,6 @@
         <mat-label>Password</mat-label>
         <input type="password" matInput formControlName="password">
         <mat-error *ngIf="password?.errors?.['required']">Password is <strong>required</strong></mat-error>
-        <mat-error *ngIf="password?.errors?.['minlength']">At least 8 <strong>characters</strong></mat-error>
-        <mat-error *ngIf="password?.errors?.['maxlength']">Maximum 16 <strong>characters</strong></mat-error>
-        <mat-error *ngIf="password?.errors?.['pattern']">Should contain numbers and letters/special <strong>characters!</strong></mat-error>
       </mat-form-field>
       <button class="btnLogIn" mat-raised-button color="primary" type="submit" (click)="openDialog()" >Log In</button>
     </form>

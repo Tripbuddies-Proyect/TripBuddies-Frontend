@@ -8,7 +8,7 @@ import {Places} from "../model/places";
   providedIn: 'root'
 })
 export class ServiceService {
-  baseURL = "http://localhost:8080/api/v1/bussiness";
+  baseURL = "http://localhost:8080/api/v1/Carrier";
   PlaceByBussinessID = "http://localhost:8080/api/v1/places/bussiness";
   ReviewPlacesURL = "http://localhost:8080/api/reviews/places";
   placesURL = "http://localhost:8080/api/v1/places";
@@ -48,8 +48,8 @@ export class ServiceService {
   DeletePlace(id:number){
     return this.http.delete(`${this.placesURL}/${id}`, this.httpOptions).pipe(retry(2), catchError(this.handleError));
   }
-  UpdatePlace(Place: Places): Observable<Places>{
-    return this.http.put<Places>(`${this.placesURL}/${Place.id}`, JSON.stringify(Place), this.httpOptions).pipe(retry(2), catchError(this.handleError));
+  UpdatePlace(id:any,Place: Places): Observable<Places>{
+    return this.http.put<Places>(`${this.placesURL}/${id}`, JSON.stringify(Place), this.httpOptions).pipe(retry(2), catchError(this.handleError));
   }
   GetReviewsByPlaceId(id: number): Observable<any>{
     return this.http.get<any>(`${this.ReviewPlacesURL}/${id}`, this.httpOptions).pipe(retry(2), catchError(this.handleError));
@@ -70,7 +70,7 @@ export class ServiceService {
       .pipe(retry(2), catchError(this.handleError));
   }
   PostPlaces(id:number, places: Places): Observable<Places>{
-    return this.http.post<Places>(`${this.placesURL}/${id}`,JSON.stringify(places) ,this.httpOptions).pipe(retry(2), catchError(this.handleError));
+    return this.http.post<Places>(`${this.placesURL}/${id}`,places ,this.httpOptions).pipe(retry(2), catchError(this.handleError));
   }
   //Notification
   GetNotificationsByUserId(id:number, userId: number): Observable<object>{

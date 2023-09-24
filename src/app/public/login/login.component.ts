@@ -4,6 +4,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import {Router} from "@angular/router";
 import {DataServiceService} from "../service/data.service.service";
+import {Traveller} from "../register/model/traveller";
+import {Bussiness} from "../register/model/bussiness";
 
 @Component({
   selector: 'app-login',
@@ -14,14 +16,18 @@ export class LoginComponent implements OnInit{
   userTraveller: Array<any>= [];
   userBussiness: Array<any>= [];
 
+  traveller:Traveller;
+  carrier:Bussiness;
   loggedIn = false;
   registered = false;
   logger: string = 'traveller';
   loginForm: FormGroup = this.formBuilder.group({
     email : ["", {validators: [Validators.required, Validators.email], updateOn: 'change'}],
-    password : ["", {validators: [Validators.required, Validators.minLength(8)], updateOn: 'change'}],
+    password : ["", {validators: [Validators.required], updateOn: 'change'}],
   });
   constructor(private formBuilder:FormBuilder, public dialog: MatDialog, private router: Router, private service: DataServiceService){
+  this.traveller = {} as Traveller;
+  this.carrier = {} as Bussiness;
   }
   ngOnInit(): void {
     this.setEmailValidation();
@@ -50,7 +56,7 @@ export class LoginComponent implements OnInit{
       } else {
         this.loginForm.get('email')?.setValidators([Validators.required, Validators.email, Validators.pattern('[a-z0-9]+@[a-z]+\.[a-z]{2,3}')]);
       }
-      this.loginForm.get('email')?.updateValueAndValidity();
+      //this.loginForm.get('email')?.updateValueAndValidity();
     });
   }
   submitForm() {
@@ -65,9 +71,9 @@ export class LoginComponent implements OnInit{
       if (value.length < 8 || value.length > 16) {
         this.loginForm.get('password')?.setValidators([Validators.required, Validators.minLength(8), Validators.maxLength(16)]);
       } else {
-        this.loginForm.get('password')?.setValidators([Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,16}$')]);
+        this.loginForm.get('password')?.setValidators([Validators.required]);
       }
-      this.loginForm.get('password')?.updateValueAndValidity();
+      //this.loginForm.get('password')?.updateValueAndValidity();
     });
   }
 
@@ -105,35 +111,25 @@ export class LoginComponent implements OnInit{
   }
 
   verifyAccount() {
-    let email = this.loginForm.get('email')?.value;
-    let password = this.loginForm.get('password')?.value;
-
-    if (email!== null && password!== null) {
-      if (this.logger === 'traveller') {
-        for (let i = 0; i < this.userTraveller.length; i++) {
-          if (this.userTraveller[i].email === email && this.userTraveller[i].password === password) {
-            this.goUserTraveller(this.userTraveller[i].id);
-            this.registered = true;
-            break;
-          }
-        }
-      }
-      else{
-        for (let i = 0; i < this.userBussiness.length; i++) {
-          if (this.userBussiness[i].email === email && this.userBussiness[i].password === password) {
-            this.goUserBussiness(this.userBussiness[i].id);
-            this.registered = true;
-            break;
-          }
-        }
-
-      }
-    }
-    if(!this.registered) {
-      this.dialog.open(DialogBoxInvalidFormComponent, {
-        data: { message: 'Email or password incorrect'},
+    let email = encodeURIComponent(this.loginForm.get('email')?.value);
+    let password = encodeURIComponent(this.loginForm.get('password')?.value);
+    if (this.logger === 'traveller') {
+      this.service.getTravellerByEmailAndPassword(email, password).subscribe((data: any) => {
+        this.traveller = data;
+        console.log(data);
+        this.goUserTraveller(this.traveller.id);
+        this.registered = true;
       });
     }
+    else{
+      this.service.getCarrierByEmailAndPassword(email, password).subscribe((data: any) => {
+        this.carrier = data;
+        console.log(data);
+        this.goUserBussiness(this.carrier.id);
+        this.registered = true;
+      });
+      }
+
   }
 
 }

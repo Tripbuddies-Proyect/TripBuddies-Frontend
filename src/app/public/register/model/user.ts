@@ -7,4 +7,6 @@ export interface User{
   password:string,
   phone:string,
   role : string,
+  image:string,
+  banner_image:string
 }

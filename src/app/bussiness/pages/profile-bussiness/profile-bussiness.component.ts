@@ -9,6 +9,7 @@ import {TravellerService} from "../../../travellers/services/traveller.service";
 import {MatDialog} from "@angular/material/dialog";
 import {toInteger} from "lodash";
 import {BusinessComponent} from "../business/business.component";
+import {Bussiness} from "../../../public/register/model/bussiness";
 
 @Component({
   selector: 'app-profile-bussiness',
@@ -25,7 +26,7 @@ export class ProfileBussinessComponent implements OnInit {
 
   @ViewChild('second')
   secondGridTile!: MatGridTile;
-  traveller!: BussinessComponent;
+  traveller!: Bussiness;
   @ViewChild('editDialog') editDialog!: TemplateRef<any>;
 
   constructor(

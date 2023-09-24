@@ -7,6 +7,7 @@ import {TravellerService} from "../../../travellers/services/traveller.service";
 import {ServiceService} from "../../service/service.service";
 import {delay} from "rxjs";
 import {toInteger} from "lodash";
+import {Bussiness} from "../../../public/register/model/bussiness";
 
 @Component({
   selector: 'app-business',
@@ -16,7 +17,7 @@ import {toInteger} from "lodash";
 export class BusinessComponent implements OnInit{
   @ViewChild(MatSidenav)
   sidenav!:MatSidenav;
-  bussiness!:BussinessComponent;
+  bussiness!:Bussiness;
   profile: boolean = false;
   currentRoute: string ="";
   notifications: Array<any> = [];
@@ -25,7 +26,7 @@ export class BusinessComponent implements OnInit{
 
   ngOnInit(): void {
     this.ngAfterViewInit();
-    this.GetAllNotifications();
+   // this.GetAllNotifications();
     const id = toInteger(localStorage.getItem("id"));
     this.service.GetBussinessById(id).subscribe((response:any)=>{
       this.bussiness = response;
