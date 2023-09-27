@@ -168,7 +168,7 @@
     </mat-form-field>
     <mat-form-field>
       <h3>Date</h3>
-      <input matInput formControlName="Date" placeholder="24/02/23" required>
+      <input matInput   formControlName="Date" placeholder="24/02/23" required>
     </mat-form-field>
     <mat-form-field>
       <h3>Hour</h3>
@@ -191,13 +191,61 @@
       <input matInput formControlName="imageUrl" placeholder="imageUrl" required>
     </mat-form-field>
 
+    <button mat-raised-button color="primary" type="submit"   *ngIf="AddAprovade; else disabledButtonPay" (click)="OpenPaymentDialog()">Pay</button>
 
-    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()">Create Place</button>
+    <button mat-raised-button color="primary"  *ngIf="PayAprovade; else disabledButton"    type="submit" (click)="onSubmit()">Create Place</button>
   </form>
 
 </ng-template>
 
+  <ng-template #disabledButton>
+    <button mat-raised-button color="primary" type="button" disabled>Create Place</button>
+  </ng-template>
+  <ng-template #disabledButtonPay>
+    <button mat-raised-button color="primary" type="button" disabled>Pay</button>
+  </ng-template>
 
+
+
+  <ng-template #PayPost>
+    <form [formGroup]="paymentPost" >
+      <h2>Payment</h2>
+      <mat-form-field>
+        <h3>creditCardNumber</h3>
+        <input matInput formControlName="creditCardNumber" placeholder="97556376262464262" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>expirationDate</h3>
+        <textarea matInput formControlName="expirationDate" placeholder="09/2006" required></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>cvv</h3>
+        <input matInput   formControlName="cvv" placeholder="378" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>cardHolderName</h3>
+        <input matInput  formControlName="cardHolderName" placeholder="Miguel Salas" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>mount</h3>
+        <input matInput formControlName="mount" placeholder="mount" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" (click)="MakePayment()">Pay</button>
+      <button mat-raised-button color="primary" type="submit" (click)="CancelPayment()">Cancel</button>
+
+    </form>
+
+  </ng-template>
+
+
+
+
+<ng-template #PayAceptado>
+<h2>Payment Acepted</h2>
+  <button mat-raised-button color="primary" type="submit" (click)="closePaymentDialog()">Ok</button>
+
+</ng-template>
 
   <ng-template #reviewDialog>
     <table mat-table [dataSource]="dataSourceReview" class="mat-elevation-z8">

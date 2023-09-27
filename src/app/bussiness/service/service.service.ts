@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import {catchError, Observable, retry, throwError} from "rxjs";
 import {BussinessComponent} from "../model/bussiness";
 import {Places} from "../model/places";
+import {Payment} from "../model/Payment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ServiceService {
   PlaceByBussinessID = "http://localhost:8080/api/v1/places/bussiness";
   ReviewPlacesURL = "http://localhost:8080/api/reviews/places";
   placesURL = "http://localhost:8080/api/v1/places";
-
+  PaymentURL = "http://localhost:8080/api/v1/Payment";
   basicUserURL = "http://localhost:8080/api/v1/users";
 
   constructor(private http: HttpClient) { }
@@ -72,6 +73,10 @@ export class ServiceService {
   PostPlaces(id:number, places: Places): Observable<Places>{
     return this.http.post<Places>(`${this.placesURL}/${id}`,places ,this.httpOptions).pipe(retry(2), catchError(this.handleError));
   }
+  PostPayment(id:number,placesid:number, payment: Payment): Observable<Payment>{
+    return this.http.post<Payment>(`${this.PaymentURL}/${id}/Places/${placesid}`, payment, this.httpOptions).pipe(retry(2), catchError(this.handleError));
+  }
+
   //Notification
   GetNotificationsByUserId(id:number, userId: number): Observable<object>{
     return this.http.get<object>(`${this.basicUserURL}/${userId}/notifications/${id}`, this.httpOptions).

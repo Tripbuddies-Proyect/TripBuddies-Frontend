@@ -11,6 +11,7 @@ import {MatTable, MatTableDataSource} from "@angular/material/table";
 import {BusinessComponent} from "../business/business.component";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatSort} from "@angular/material/sort";
+import {Payment} from "../../model/Payment";
 
 
 @Component({
@@ -20,9 +21,22 @@ import {MatSort} from "@angular/material/sort";
 })
 export class HomeBussinessComponent implements OnInit{
   UserId:any;
+  PayAprovade:boolean;
+  AddAprovade:boolean;
   constructor(private dialog: MatDialog,private router: Router,private HttpDataServices:ServiceService,private BussinessService:ServiceService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
     this.PlacesData={} as Places;
+
     this.User={} as BussinessComponent;
+    this.Payment={} as Payment;
+    this.PayAprovade=false;
+    this.AddAprovade=true;
+    this.paymentPost = this.formBuilder.group({
+      creditCardNumber: ['', [Validators.required]],
+      expirationDate: ['', [Validators.required]],
+      cvv: ['', [Validators.required]],
+      cardHolderName: ['', [Validators.required]],
+      mount: ['', [Validators.required]]
+    });
 
     this.placeUpdateForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -39,7 +53,7 @@ export class HomeBussinessComponent implements OnInit{
       name: ['', Validators.required],
       description: ['', Validators.required],
       imageUrl: ['', Validators.required],
-      price: ['', Validators.required, this.numberValidator],
+      price: ['', Validators.required],
       origen: ['', Validators.required],
       destino: ['', Validators.required],
       Date: ['', Validators.required],
@@ -53,20 +67,22 @@ export class HomeBussinessComponent implements OnInit{
     this.getUserBussiness(this.UserId);
   }
   PlacesData:Places;
+  Placeid:any;
   @ViewChild('editDialog') editDialog!: TemplateRef<any>;
-
+  @ViewChild('PayPost') PayPost!: TemplateRef<any>;
   @ViewChild('reviewDialog') reviewDialog!: TemplateRef<any>;
-
+  @ViewChild('PayAceptado') PayAceptado!: TemplateRef<any>;
   @ViewChild('addPlaceDialog') addPlaceDialog!: TemplateRef<any>;
-
   placeForm: FormGroup;
   placeUpdateForm: FormGroup;
+  Payment!:Payment;
   PlaceRow!:Places;
   User:BussinessComponent;
   dataSource=new MatTableDataSource();
   dataSourceReview=new MatTableDataSource();
   displayedColumns:string[]=['name','description','imageUrl','price','origen','destino','date','hour','actions','reviews'];
   displayedColumnsReview:string[]=['FirstName','LastName','PlaceName','imagenurl','Reviews'];
+  paymentPost: FormGroup;
 
 
   numberValidator(control: FormControl) {
@@ -111,7 +127,12 @@ export class HomeBussinessComponent implements OnInit{
       this.PlacesData.description = this.placeForm.get('description')?.value;
       this.PlacesData.name = this.placeForm.get('name')?.value;
       this.BussinessService.PostPlaces(this.UserId, this.PlacesData).subscribe((response: any) => {
+        this.HttpDataServices.PostPayment(this.UserId,response.id, this.Payment).subscribe((response: any) => {
+        });
+        this.AddAprovade=true;
+        this.dialog.closeAll()
         this.getAllPlacesbyBussiness(this.UserId);
+
       });
     }
   }
@@ -165,7 +186,26 @@ export class HomeBussinessComponent implements OnInit{
   }
 
 
+  MakePayment() {
+    if (this.paymentPost.valid) {
+      this.Payment.amount = this.paymentPost.get('mount')?.value;
+      this.PayAprovade=true;
+      this.AddAprovade=false;
+      this.dialog.open(this.PayAceptado);
+    }
+  }
 
+  CancelPayment() {
+    this.dialog.closeAll();
+  }
 
+  OpenPaymentDialog() {
+    this.dialog.open(this.PayPost);
 
+  }
+
+  closePaymentDialog() {
+    this.dialog.open(this.addPlaceDialog);
+
+  }
 }

@@ -1,8 +1,8 @@
 <div class="container">
   <div class="option">
-    <h3>Buscar lugares por localización</h3>
+    <h3>Buscar lugares por destino a viajar</h3>
     <mat-form-field>
-      <input matInput placeholder="Localización" [(ngModel)]="searchLocation">
+      <input matInput placeholder="destino" [(ngModel)]="destino">
     </mat-form-field>
     <button mat-raised-button color="primary" (click)="openLocationAll()">Buscar</button>
   </div>
@@ -13,6 +13,10 @@
   <div class="map-image">
     <img src="https://th.bing.com/th/id/R.64dbf9d2ca128a1b2b8cbe781874fb1e?rik=lP7GEkO76xzOQA&riu=http%3a%2f%2fcdn.wccftech.com%2fwp-content%2fuploads%2f2017%2f03%2fGoogle-Maps.jpg&ehk=xcHOr5BQ%2b6aPyq162KQL96IhP1d6RiHUqhGvH5Zu7xg%3d&risl=&pid=ImgRaw&r=0" alt="Google Maps" />
   </div>
+
+
+
+
   <ng-template #locationAll>
     <div class="results mat-table-responsive" *ngIf="places.length > 0">
       <table mat-table [dataSource]="places" class="mat-elevation-z8">
@@ -61,51 +65,63 @@
       </table>
     </div>
   </ng-template>
+
+
+
   <ng-template #placesAll>
     <div class="results mat-table-responsive" *ngIf="places.length > 0">
       <table mat-table [dataSource]="places" class="mat-elevation-z8">
         <!-- Column definitions -->
         <ng-container matColumnDef="photo">
           <th mat-header-cell *matHeaderCellDef>Foto</th>
-          <td mat-cell *matCellDef="let place"><img [src]="place.imageUrl" alt="Foto del lugar" width="150px" height="150px"></td>
+          <td mat-cell *matCellDef="let element"><img [src]="place.imageUrl" alt="Foto del lugar" width="150px" height="150px"></td>
         </ng-container>
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Nombre</th>
-          <td mat-cell *matCellDef="let place">{{ place.name }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
         </ng-container>
         <ng-container matColumnDef="description">
           <th mat-header-cell *matHeaderCellDef>Descripción</th>
-          <td mat-cell *matCellDef="let place">{{ place.description }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
         </ng-container>
         <ng-container matColumnDef="location">
-          <th mat-header-cell *matHeaderCellDef>Localización</th>
-          <td mat-cell *matCellDef="let place">{{ place.location }}</td>
+          <th mat-header-cell *matHeaderCellDef>destino</th>
+          <td mat-cell *matCellDef="let element">{{ element.destino }}</td>
         </ng-container>
         <ng-container matColumnDef="price">
           <th mat-header-cell *matHeaderCellDef>Precio</th>
-          <td mat-cell *matCellDef="let place">{{ place.price }}</td>
+          <td mat-cell *matCellDef="let element">{{ element.price }}</td>
         </ng-container>
         <ng-container matColumnDef="favorite">
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
-          <td mat-cell *matCellDef="let place">
-            <button mat-icon-button color="warn" (click)="addToFavorites(place.id)">
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="warn" (click)="addToFavorites(element.id)">
               <mat-icon > favorite</mat-icon>
             </button>
-            <button mat-icon-button color="warn" (click)="SendMessageToBussines(place.bussiness.id)">
+            <button mat-icon-button color="warn" (click)="SendMessageToBussines(element.bussiness.id)">
               <mat-icon>message</mat-icon>
             </button>
           </td>
         </ng-container>
         <ng-container matColumnDef="reviews">
           <th mat-header-cell *matHeaderCellDef>Reseñas</th>
-          <td mat-cell *matCellDef="let place">
-            <button mat-raised-button color="primary" (click)="openEditDialog(place.id)" >Ver reseñas</button>
+          <td mat-cell *matCellDef="let element">
+            <button mat-raised-button color="primary" (click)="openEditDialog(element.id)" >Ver reseñas</button>
           </td>
         </ng-container>
+        <ng-container matColumnDef="adquisicion">
+          <th mat-header-cell *matHeaderCellDef>adquisicion</th>
+          <td mat-cell *matCellDef="let element">
+          <button mat-raised-button color="primary"  >Adquirir</button>
+
+        </ng-container>
+
+
+
 
         <!-- Table rows -->
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let place; columns: displayedColumns;"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsAllPlaces"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsAllPlaces;"></tr>
       </table>
     </div>
   </ng-template>
@@ -136,7 +152,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Acciones</th>
       <td mat-cell *matCellDef="let review">
-        <button mat-icon-button color="primary" *ngIf="isCurrentUserReview(review)" (click)="editReview(review)">
+        <button mat-icon-button color="primary" *ngIf="isCurrentUserReview(review)" (click)="openEditReview(review)">
           <mat-icon>edit</mat-icon>
         </button>
       </td>
@@ -159,12 +175,30 @@
           <input type="text" matInput placeholder="Review" name="Review" required [(ngModel)]="review.reviewText">
         </mat-form-field>
 
-        <button mat-button class="edit" (click)="add()">Add</button> &nbsp;
+        <button mat-button class="edit" (click)="add()">Update</button> &nbsp;
         <button mat-button class="edit" >Cancel</button> &nbsp;
       </div>
     </form>
   </div>
 </ng-template>
 
+<ng-template #editReviewByTraveller>
+  <div class="create-review">
+    <h3>Editar reseña</h3>
+    <form (submit)="onSubmit()" #ReviewsForm="ngForm">
+      <div class="container">
+        <div class="content_title">
+          <h1 class="title">Edit Review the Places</h1>
+        </div>
+        <mat-form-field appearance="fill"> <!-- placeholder: lo que se pondrá de titulo -->
+          <mat-label>Review</mat-label>
+          <input type="text" matInput placeholder="Review" name="Review" required [(ngModel)]="review.reviewText">
+        </mat-form-field>
 
+        <button mat-button class="edit" (click)="add()">Update</button> &nbsp;
+        <button mat-button class="edit" >Cancel</button> &nbsp;
+      </div>
+    </form>
+  </div>
+</ng-template>
 

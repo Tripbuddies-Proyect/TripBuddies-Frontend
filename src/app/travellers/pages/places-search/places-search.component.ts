@@ -19,9 +19,11 @@ import {Favorite} from "../../models/favorite";
   styleUrls: ['./places-search.component.css']
 })
 export class PlacesSearchComponent implements OnInit {
-  searchLocation: string = '';
+  destino: string = '';
   places: Places[] = [];
   displayedColumns: string[] = ['photo', 'name', 'description', 'location', 'price', 'favorite', 'reviews'];
+  displayedColumnsAllPlaces: string[] = ['photo', 'name', 'description', 'location', 'price', 'favorite', 'reviews','adquisicion'];
+
   place: Places;
   newReviewContent: string = '';
   review: Review;
@@ -33,6 +35,7 @@ export class PlacesSearchComponent implements OnInit {
   favorite: Favorite;
   placeId: any; // Cambiado el nombre a PlaceId en lugar de PlaceID
   @ViewChild('editDialog') editDialog!: TemplateRef<any>;
+  @ViewChild('editReviewByTraveller') editReviewByTraveller!: TemplateRef<any>;
   @ViewChild('addReview') addReview!: TemplateRef<any>;
   @ViewChild('placesAll') placesAll!: TemplateRef<any>;
   @ViewChild('locationAll') locationAll!: TemplateRef<any>;
@@ -56,17 +59,16 @@ export class PlacesSearchComponent implements OnInit {
   ngOnInit(): void {
     const id = toInteger(localStorage.getItem("id"));
     this.UserId = id;
-    this.route.params.subscribe(params => {
-      this.placeId = +params['placesid']; // El "+" convierte el parámetro en un número
-    });
-    this.GetTravellerId(id);
+    //this.route.params.subscribe(params => {
+    //  this.placeId = +params['placesid']; // El "+" convierte el parámetro en un número
+    //});
+   // this.GetTravellerId(id);
   }
 
   searchPlaces() {
-    this.placeService.searchPlacesByLocation(this.searchLocation).subscribe(
+    this.placeService.searchPlacesByLocation(this.destino).subscribe(
       (response: any) => {
-        this.places = response;
-        console.log(response);
+        this.places= response;
       },
       (error: any) => {
         console.error('Error al buscar lugares:', error);
@@ -137,6 +139,14 @@ export class PlacesSearchComponent implements OnInit {
   openAddReview() {
     this.dialog.open(this.addReview);
   }
+
+  openEditReview(review: Review) {
+    this.placeService.GetReviewById(review.id).subscribe(
+      (response: any) => {
+        review=response;
+      });
+    this.dialog.open(this.editReviewByTraveller);
+  }
   closeEditDialog(): void {
     this.dialog.closeAll();
   }
@@ -182,13 +192,13 @@ export class PlacesSearchComponent implements OnInit {
   add() {
     this.createReviews(this.placeId, this.review);
   }
-  GetTravellerId(id:any){
-    this.placeService.GetTravellerById(id).subscribe((response:any)=>{
-      this.users=response;
-      this.review.traveller=this.users;
-      this.GetPlacesId(this.placeId);
-    });
-  }
+ //GetTravellerId(id:any){
+ //  this.placeService.GetTravellerById(id).subscribe((response:any)=>{
+ //    this.users=response;
+ //    this.review.traveller=this.users;
+ //    this.GetPlacesId(this.placeId);
+ //  });
+ //}
   GetPlacesId(id:any){
     this.placeService.GetPlacesById(id).subscribe((response:any)=>{
       this.review.places=response;
