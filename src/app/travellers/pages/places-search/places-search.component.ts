@@ -247,18 +247,18 @@ export class PlacesSearchComponent implements OnInit {
   }
 
   AdquirirPlace(PlacesId: number) {
-    if (this.placeService.VerifyAdquisicion(this.UserId, PlacesId)) {
-      this.showAdquisicionMessage = false;
-      this.dialog.open(this.adquisicionFailed);
-    }else{
-      this.showAdquisicionMessage = true;
-      this.Adquisicion.date = new Date().toISOString().slice(0, 10);
-    this.placeService.PostAdquisicon(this.Adquisicion, PlacesId, this.UserId).subscribe((response: any) => {
+    this.placeService.VerifyAdquisicion(this.UserId, PlacesId).subscribe((response: any) => {
+      if (response) {
+        this.showAdquisicionMessage = false;
+        this.dialog.open(this.adquisicionFailed);
+      }else{
+        this.showAdquisicionMessage = true;
+        this.Adquisicion.date = new Date().toISOString().slice(0, 10);
+        this.placeService.PostAdquisicon(this.Adquisicion, PlacesId, this.UserId).subscribe((response: any) => {
+        });
+        this.dialog.open(this.adquisicionCompleted);
+      }
+
     });
-    this.openAdquisicionMessage();
-    this.dialog.open(this.adquisicionCompleted);
   }
-  }
-
-
 }
