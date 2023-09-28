@@ -1,12 +1,12 @@
 export interface Traveller{
-  bannerImage:string,
+  id: number,
+  firstName:string,
+  lastName:string,
   description:string,
   email:string,
-  firstName:string,
-  id:number,
-  image:string,
-  lastName:string,
   password:string,
   phone:string,
   role : string,
+  image:string,
+  bannerImage:string
 }

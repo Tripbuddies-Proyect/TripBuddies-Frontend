@@ -8,8 +8,9 @@ export interface Places{
   description:string,
   imageUrl:string,
   price: number,
-  location: string,
-  country: string,
-  bussiness: Bussiness,
-  reviews: Review;
+  destino:string,
+  date:string,
+  hour:string,
+  origen:string,
+  carriers: Bussiness,
 }

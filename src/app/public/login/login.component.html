@@ -13,8 +13,8 @@
   <section class="items-section">
     <p>Login as</p>
     <mat-radio-group [(ngModel)]="logger">
-      <mat-radio-button class="items-margin" value="traveller" checked>Traveller</mat-radio-button>
-      <mat-radio-button  class="items-margin" value="bussiness">Bussiness</mat-radio-button>
+      <mat-radio-button name="traveler_option_button" class="items-margin" value="traveller" checked>Traveller</mat-radio-button>
+      <mat-radio-button  name="carrier_option_button" class="items-margin" value="business">Business</mat-radio-button>
     </mat-radio-group>
   </section>
   <div class="form-login">
@@ -22,28 +22,21 @@
       <!--Email-->
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Email</mat-label>
-        <input type="text" matInput formControlName="email" placeholder="example@gmail.com">
+        <input name="email" type="text" matInput formControlName="email" placeholder="example@gmail.com">
         <mat-error *ngIf="email?.errors?.['required']">Email is <strong>required</strong></mat-error>
         <mat-error *ngIf="email?.errors?.['pattern'] || email?.errors?.['email'] ">Please enter valid <strong>email</strong></mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill" class="full-width">
         <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="password">
+        <input name="password" type="password" matInput formControlName="password">
         <mat-error *ngIf="password?.errors?.['required']">Password is <strong>required</strong></mat-error>
-        <mat-error *ngIf="password?.errors?.['minlength']">At least 8 <strong>characters</strong></mat-error>
-        <mat-error *ngIf="password?.errors?.['maxlength']">Maximum 16 <strong>characters</strong></mat-error>
-        <mat-error *ngIf="password?.errors?.['pattern']">Should contain numbers and letters/special <strong>characters!</strong></mat-error>
       </mat-form-field>
-      <button class="btnLogIn" mat-raised-button color="primary" type="submit" (click)="openDialog()" >Log In</button>
+      <button class="btnLogIn" name="login_button" at-raised-button color="primary" type="submit" (click)="openDialog()" >Log In</button>
     </form>
     <ul>
       <li><a routerLink="/forgot-password">Forgot Password?</a></li>
       <li><a routerLink="/sign-up/traveller">Create a new account</a></li>
     </ul>
   </div>
-  <p>© 2022 TripBuddies.All your privacy is sure!</p>
+  <p>Â© 2022 TripBuddies.All your privacy is sure!</p>
 </div>
-
-
-
-

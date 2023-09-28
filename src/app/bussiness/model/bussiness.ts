@@ -1,18 +1,19 @@
 export interface BussinessComponent {
-  bannerImage:string,
+  id: number,
+  firstName:string,
+  lastName:string,
   description:string,
   email:string,
-  firstName:string,
-  id:number,
-  image:string,
-  lastName:string,
   password:string,
   phone:string,
   role : string,
-  name: string,
-  ruc: string,
-  owner: string,
-  address: string,
-  locality: string,
-  city: string,
+  image:string,
+  bannerImage:string
+  ruc:string,
+  address:string,
+  country:string,
+  city:string,
+  Plate : string,
+  Marca : string
 }
+

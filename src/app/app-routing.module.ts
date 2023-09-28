@@ -20,10 +20,10 @@ import {HomeBussinessComponent} from "./bussiness/pages/home-bussiness/home-buss
 import {
   NotificationBussinessComponent
 } from "./bussiness/pages/notification-bussiness/notification-bussiness.component";
-import {MessagesBussinessComponent} from "./bussiness/pages/messages-bussiness/messages-bussiness.component";
 import {PlansBussinessComponent} from "./bussiness/pages/plans-bussiness/plans-bussiness.component";
 import {ProfileBussinessComponent} from "./bussiness/pages/profile-bussiness/profile-bussiness.component";
 import {BusinessComponent} from "./bussiness/pages/business/business.component";
+import {PaymentsBussinessComponent} from "./bussiness/pages/payments-bussiness/payments-bussiness.component";
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -49,7 +49,7 @@ const routes: Routes = [
     path:'bussiness', component: BusinessComponent, children: [
         {path:'home', component: HomeBussinessComponent},
         {path: 'notifications', component: NotificationBussinessComponent},
-        { path: 'messages', component: MessagesBussinessComponent },
+        { path: 'payments', component: PaymentsBussinessComponent },
       {path: 'plans', component: PlansBussinessComponent},
       {path:  'profile', component: ProfileBussinessComponent},
 

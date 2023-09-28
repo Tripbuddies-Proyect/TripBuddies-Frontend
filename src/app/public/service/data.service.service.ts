@@ -10,7 +10,7 @@ import {Traveller} from "../register/model/traveller";
 })
 export class DataServiceService {
   travellerURL = "http://localhost:8080/api/v1/travellers";
-  bussinessURL = "http://localhost:8080/api/v1/bussiness";
+  bussinessURL = "http://localhost:8080/api/v1/Carrier";
   basePath = "http://localhost:8080/api/v1/users";
   friendIdURL = "http://localhost:8080/api/v1/friendship/user";
   favoriteIdURL = "http://localhost:8080/api/v1/favorites/travellerId/";
@@ -88,4 +88,19 @@ export class DataServiceService {
       .post<any>(`${this.favoriteIdURL}/${id}`, favorites, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
+
+  getTravellerByEmailAndPassword(email:string,password:string): Observable<Traveller> {
+    return this.http
+      .get<Traveller>(`${this.travellerURL}/email/${email}/password/${password}`, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+  getCarrierByEmailAndPassword(email:string,password:string): Observable<Traveller> {
+    return this.http
+      .get<Traveller>(`${this.bussinessURL}/email/${email}/password/${password}`, this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+
+
+
 }

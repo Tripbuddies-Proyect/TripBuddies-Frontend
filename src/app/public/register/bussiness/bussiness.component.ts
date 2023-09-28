@@ -29,9 +29,9 @@ export class BussinessComponent implements OnInit {
         email: new FormControl('', { validators:  [Validators.required, Validators.email], updateOn: 'change' }),
         password: new FormControl('', { validators:  [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'change' }),
         password_confirm: new FormControl('', { validators: [Validators.required, Validators.minLength(8), Validators.maxLength(16)], updateOn: 'change' }),
-        company_name: ["", Validators.required],
-        ruc: ["", Validators.required],
-        owner_name: ["", Validators.required],
+        Marca_name: ["", Validators.required],
+        ruc_name: ["", Validators.required],
+        Plate_name: ["", Validators.required],
         address: ["", Validators.required],
         country: ["", Validators.required],
         city: ["", Validators.required]
@@ -43,30 +43,31 @@ export class BussinessComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setEmailValidation();
-    this. setPhoneValidation();
-    this.setPaswordValidation();
+   //this.setEmailValidation();
+   //this. setPhoneValidation();
+   //this.setPaswordValidation();
   }
 
   Add(){
     this.TempComp.address = this.registerForm.get('address')?.value;
-    this.TempComp.bannerImage = 'https://blog.vantagecircle.com/content/images/size/w1000/2019/03/7-Ways-to-Build-a-Strong-Company-Culture.png';
+    this.TempComp.bannerImage = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fskydatalatam.com%2Fblog%2Ftransportista-como-influyen-para-planificar-rutas%2F&psig=AOvVaw3xG1XlZVpq797Ee3xhRl0e&ust=1695361231020000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCKC70vf-uoEDFQAAAAAdAAAAABAI';
     this.TempComp.city = this.registerForm.get('city')?.value;
     this.TempComp.country = this.registerForm.get('country')?.value;
-    this.TempComp.description =  'I am a recruiter';
+    this.TempComp.description =  'I am a carrier';
     this.TempComp.email =  this.registerForm.get('email')?.value;
     this.TempComp.firstName =  this.registerForm.get('first_name')?.value;
-    this.TempComp.image = 'https://d500.epimg.net/cincodias/imagenes/2016/07/04/lifestyle/1467646262_522853_1467646344_noticia_normal.jpg';
+    this.TempComp.image = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngegg.com%2Fes%2Fpng-ecndy&psig=AOvVaw2mD8pGhu1N5sS9br3Qv7tq&ust=1695366486882000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCLDJkbySu4EDFQAAAAAdAAAAABAJ';
     this.TempComp.lastName =  this.registerForm.get('last_name')?.value;
-    this.TempComp.name=  this.registerForm.get('company_name')?.value;
-    this.TempComp.owner =  this.registerForm.get('owner_name')?.value;
     this.TempComp.password =  this.registerForm.get('password')?.value;
     this.TempComp.phone =  this.registerForm.get('phone')?.value;
-    this.TempComp.role =  'bussiness';
-    this.TempComp.ruc =  this.registerForm.get('ruc')?.value;
-    this.service.postBussiness(this.TempComp).subscribe((response:any) => {
-      console.log(this.TempComp);
-    });
+    this.TempComp.role =  'carrier';
+    this.TempComp.ruc =  this.registerForm.get('ruc_name')?.value;
+    this.TempComp.Plate =  this.registerForm.get('Plate_name')?.value;
+    this.TempComp.Marca =  this.registerForm.get('Marca_name')?.value;
+
+
+
+    this.service.postBussiness(this.TempComp).subscribe((response:any) => {console.log(response)});
   }
 
   openDialog() {

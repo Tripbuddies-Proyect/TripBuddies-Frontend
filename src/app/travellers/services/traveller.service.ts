@@ -6,20 +6,22 @@ import {Favorite} from "../models/favorite";
 import {Places} from "../../bussiness/model/places";
 import {Friendship} from "../models/friendship";
 import {Review} from "../models/review";
+import {Adquisicions} from "../models/Adquisicions";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TravellerService {
   basicUserURL = "http://localhost:8080/api/v1/users";
-  baseURL = "http://localhost:8080/api/v1/users";
+  baseURL = "http://localhost:8080/api/v1/travellers";
   favoriteURL = "http://localhost:8080/api/v1/favorites";
   matchURL = "http://localhost:8080/api/v1/friendship";
   placesURL = "http://localhost:8080/api/v1/places";
-  findPlacesURL = "http://localhost:8080/api/v1/places/location";
+  findPlacesbyDestinoURL = "http://localhost:8080/api/v1/places/destino";
   PostReviewURL= "http://localhost:8080/api/reviews/places"
   ReviewURL = "http://localhost:8080/api/reviews";
   ReviewPlacesURL = "http://localhost:8080/api/reviews/places";
+  AdqusisiconURL = "http://localhost:8080/api/v1/Adquisicions";
   constructor(private http: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
@@ -38,6 +40,29 @@ export class TravellerService {
       'something happened with request, please try again later'
     );
   }
+
+
+  GetAdquisicionById(id: number): Observable<Adquisicions>{
+    return this.http.get<Adquisicions>(`${this.AdqusisiconURL}/${id}`, this.httpOptions).
+    pipe(retry(2), catchError(this.handleError));
+  }
+
+  PostAdquisicon(adquisicion: Adquisicions,PlacesId:number,TravellerId:number): Observable<Adquisicions>{
+    return this.http.post<Adquisicions>(`${this.AdqusisiconURL}/${TravellerId}/place/${PlacesId}`, JSON.stringify(adquisicion), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  VerifyAdquisicion(TravellerId:number,PlaceId:number): Observable<Adquisicions>{
+    return this.http.get<Adquisicions>(`${this.AdqusisiconURL}/traveller/${TravellerId}/place/${PlaceId}`, this.httpOptions).pipe(retry(2), catchError(this.handleError));
+  }
+
+
+  GetAdquisicionByTravellerId(id: number): Observable<Adquisicions>{
+    return this.http.get<Adquisicions>(`${this.AdqusisiconURL}/traveller/${id}`, this.httpOptions).pipe(retry(2), catchError(this.handleError));
+  }
+
+
+
   GetAllTravellers(): Observable<any>{
     return this.http.get<Traveller>(this.baseURL, this.httpOptions).
     pipe(retry(2), catchError(this.handleError));
@@ -115,10 +140,10 @@ export class TravellerService {
       .pipe(retry(2), catchError(this.handleError));
   }
   GetPlacesByLocation(location: string): Observable<Places>{
-    return this.http.get<Places>(`${this.findPlacesURL}/${location}`, this.httpOptions).
+    return this.http.get<Places>(`${this.findPlacesbyDestinoURL}/${location}`, this.httpOptions).
     pipe(retry(2), catchError(this.handleError));
   }
-  UpdateReview(reviewId: number): Observable<any>{
+  GetReviewById(reviewId: number): Observable<any>{
     return this.http.put<any>(`${this.ReviewURL}/${reviewId}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
@@ -126,6 +151,10 @@ export class TravellerService {
     return this.http.get<any>(`${this.ReviewPlacesURL}/${placeId}`, this.httpOptions).
     pipe(retry(2), catchError(this.handleError));
   }
+
+
+
+
   getCurrentUser(userId: number): Observable<any> {
     return this.http.get<any>(`${this.baseURL}/${userId}`, this.httpOptions)
       .pipe(
@@ -136,7 +165,7 @@ export class TravellerService {
   }
 
   searchPlacesByLocation(searchLocation: any): Observable<any>{
-    return this.http.get<any>(`${this.findPlacesURL}/${searchLocation}`, this.httpOptions)
+    return this.http.get<any>(`${this.findPlacesbyDestinoURL}/${searchLocation}`, this.httpOptions)
       .pipe(retry(2),catchError(this.handleError));
   }
 

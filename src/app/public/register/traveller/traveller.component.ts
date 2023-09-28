@@ -34,9 +34,9 @@ export class TravellerComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.setEmailValidation();
-    this.setPhoneValidation();
-    this.setPaswordValidation();
+    //this.setEmailValidation();
+    //this.setPhoneValidation();
+    //this.setPaswordValidation();
   }
 
   MustMatch(password: string, passwordConfirm: string) {
@@ -112,7 +112,7 @@ export class TravellerComponent implements OnInit{
     this.TempTraveller.password = this.registerForm.get('password')?.value;
     this.TempTraveller.description =  'I am a traveller';
     this.TempTraveller.role =  'traveller';
-    this.TempTraveller.image = 'https://d500.epimg.net/cincodias/imagenes/2016/07/04/lifestyle/1467646262_522853_1467646344_noticia_normal.jpg';
+    this.TempTraveller.image = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fes%2Ffree-png-cnief&psig=AOvVaw2mD8pGhu1N5sS9br3Qv7tq&ust=1695366486882000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCLDJkbySu4EDFQAAAAAdAAAAABAE';
     this.TempTraveller.bannerImage = 'https://thumbs.dreamstime.com/b/internet-information-technology-businessman-hand-showing-concept-75784736.jpg';
 
     var req = new XMLHttpRequest();
@@ -120,7 +120,6 @@ export class TravellerComponent implements OnInit{
     req.setRequestHeader('Content-Type', 'application/json');
     req.send(JSON.stringify(this.TempTraveller));
     console.log('Traveller added successfully!');
-    console.log(req.responseText);
   }
   openDialog() {
     if (this.registerForm.invalid) {
