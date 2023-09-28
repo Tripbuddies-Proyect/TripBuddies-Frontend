@@ -6,6 +6,7 @@ import {Favorite} from "../models/favorite";
 import {Places} from "../../bussiness/model/places";
 import {Friendship} from "../models/friendship";
 import {Review} from "../models/review";
+import {Adquisicions} from "../models/Adquisicions";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class TravellerService {
   PostReviewURL= "http://localhost:8080/api/reviews/places"
   ReviewURL = "http://localhost:8080/api/reviews";
   ReviewPlacesURL = "http://localhost:8080/api/reviews/places";
+  AdqusisiconURL = "http://localhost:8080/api/v1/Adquisicions";
   constructor(private http: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
@@ -38,6 +40,29 @@ export class TravellerService {
       'something happened with request, please try again later'
     );
   }
+
+
+  GetAdquisicionById(id: number): Observable<Adquisicions>{
+    return this.http.get<Adquisicions>(`${this.AdqusisiconURL}/${id}`, this.httpOptions).
+    pipe(retry(2), catchError(this.handleError));
+  }
+
+  PostAdquisicon(adquisicion: Adquisicions,PlacesId:number,TravellerId:number): Observable<Adquisicions>{
+    return this.http.post<Adquisicions>(`${this.AdqusisiconURL}/${TravellerId}/place/${PlacesId}`, JSON.stringify(adquisicion), this.httpOptions)
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  VerifyAdquisicion(TravellerId:number,PlaceId:number): Observable<Adquisicions>{
+    return this.http.get<Adquisicions>(`${this.AdqusisiconURL}/traveller/${TravellerId}/place/${PlaceId}`, this.httpOptions).pipe(retry(2), catchError(this.handleError));
+  }
+
+
+  GetAdquisicionByTravellerId(id: number): Observable<Adquisicions>{
+    return this.http.get<Adquisicions>(`${this.AdqusisiconURL}/traveller/${id}`, this.httpOptions).pipe(retry(2), catchError(this.handleError));
+  }
+
+
+
   GetAllTravellers(): Observable<any>{
     return this.http.get<Traveller>(this.baseURL, this.httpOptions).
     pipe(retry(2), catchError(this.handleError));
