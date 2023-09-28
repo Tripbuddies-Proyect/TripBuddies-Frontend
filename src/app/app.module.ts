@@ -59,6 +59,7 @@ import { ReviewsPlacesComponent } from './travellers/pages/places-search/reviews
 import {CdkColumnDef} from "@angular/cdk/table";
 import { BusinessComponent } from './bussiness/pages/business/business.component';
 import { AddCardDialogComponent } from './bussiness/pages/add-card-dialog/add-card-dialog.component';
+import { PaymentsBussinessComponent } from './bussiness/pages/payments-bussiness/payments-bussiness.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { AddCardDialogComponent } from './bussiness/pages/add-card-dialog/add-ca
     PlacesSearchComponent,
     ReviewsPlacesComponent,
     BusinessComponent,
-    AddCardDialogComponent
+    AddCardDialogComponent,
+    PaymentsBussinessComponent
   ],
   imports: [
     BrowserModule,

@@ -48,13 +48,7 @@ export class PlacesSearchComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   showAdquisicionMessage = false;
 
-  openAdquisicionMessage() {
-    this.showAdquisicionMessage = true;
-  }
 
-  closeAdquisicionMessage() {
-    this.showAdquisicionMessage = false;
-  }
   constructor(
     private placeService: TravellerService,
     private router: Router,
@@ -252,10 +246,10 @@ export class PlacesSearchComponent implements OnInit {
         this.showAdquisicionMessage = false;
         this.dialog.open(this.adquisicionFailed);
       }else{
-        this.showAdquisicionMessage = true;
         this.Adquisicion.date = new Date().toISOString().slice(0, 10);
         this.placeService.PostAdquisicon(this.Adquisicion, PlacesId, this.UserId).subscribe((response: any) => {
         });
+        this.showAdquisicionMessage = true;
         this.dialog.open(this.adquisicionCompleted);
       }
 

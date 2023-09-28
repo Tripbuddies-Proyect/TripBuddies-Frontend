@@ -23,49 +23,7 @@ export class MessagesBussinessComponent implements OnInit {
   constructor(private service: ServiceService, private breakpoint: BreakpointObserver) { }
 
   ngOnInit(): void {
-    this.UserId = toInteger(localStorage.getItem("id"));
-    this.breakpoint.observe([Breakpoints.XSmall, Breakpoints.HandsetLandscape]).subscribe((response: any) => {
-      console.log(response);
-      if (response.matches) {
-        this.mobile = true;
-      }
-      else {
-        this.mobile = false;
-      }
-    });
-    this.GetContacts(this.UserId);
   }
 
-  GetContacts(UserId:number){
-    this.service.GetContacts(UserId).subscribe((response:any) => {
-      this.contacts = response;
-    });
-  }
-
-  GetMessages(id: number){
-    this.service.GetMessages(id, this.UserId).subscribe((response:any) => {
-      this.messages = response;
-      console.log(response)
-    });
-  }
-
-  SendMessage(contactId: number){
-    let TempAnswer:object = {
-      "id":0,
-      "message": this.answer,
-      "emitter": {
-        "id": this.UserId
-      },
-      "receiver": {
-        "id": contactId
-      }
-    }
-
-    this.service.SendMessage(TempAnswer, contactId, this.UserId).subscribe(response => {
-      this.messages.push(response);
-    });
-
-    this.answer = "";
-  }
 
 }

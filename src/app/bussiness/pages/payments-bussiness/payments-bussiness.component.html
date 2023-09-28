@@ -1,0 +1,21 @@
+<h2>Aquí están todos los pagos realizados</h2>
+
+<mat-table [dataSource]="PaymentsDataSource">
+  <!-- Columna para el nombre del cliente -->
+  <ng-container matColumnDef="cliente">
+    <mat-header-cell *matHeaderCellDef>Cliente</mat-header-cell>
+    <mat-cell *matCellDef="let pago">{{ pago.cliente }}</mat-cell>
+  </ng-container>
+
+  <!-- Otras columnas para los datos del pago (puedes agregar más según tus necesidades) -->
+  <!-- Por ejemplo, para una columna de fecha de pago -->
+  <ng-container matColumnDef="fechaPago">
+    <mat-header-cell *matHeaderCellDef>Fecha de Pago</mat-header-cell>
+    <mat-cell *matCellDef="let pago">{{ pago.fechaPago | date }}</mat-cell>
+  </ng-container>
+
+  <!-- Agrega más columnas según tus datos -->
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

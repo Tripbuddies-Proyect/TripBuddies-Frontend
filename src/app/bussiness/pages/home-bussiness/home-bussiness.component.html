@@ -5,7 +5,7 @@
       Hello {{User.firstName}} {{User.lastName}}
     </h1>
     <p>En la siguiente tabla tienes todos los lugares agregados de  su negocio:</p>
-    <button class="options-toolbar button-toolbar" (click)="openAddPlaceDialog()">Add Place</button>
+    <button name="add_place_button" class="options-toolbar button-toolbar" (click)="openAddPlaceDialog()">Add Place</button>
   </div>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -81,171 +81,123 @@
     <form [formGroup]="placeUpdateForm" (ngSubmit)="saveChanges()">
       <mat-form-field>
         <h3>Name</h3>
-        <input matInput formControlName="name" placeholder="Name" [ngModel]="PlacesData.name" required>
+        <input matInput name="edit_name_place" formControlName="name" placeholder="Name" [ngModel]="PlacesData.name" required>
       </mat-form-field>
       <mat-form-field>
         <h3>Description</h3>
-        <textarea matInput formControlName="description" placeholder="Description" [ngModel]="PlacesData.description"required></textarea>
+        <textarea matInput name="edit_description_place" formControlName="description" placeholder="Description" [ngModel]="PlacesData.description"required></textarea>
       </mat-form-field>
       <mat-form-field>
         <h3>Date</h3>
-        <input matInput formControlName="Date" placeholder="24/02/23" [ngModel]="PlacesData.date" required>
+        <input matInput name="edit_date_place" formControlName="Date" placeholder="24/02/23" [ngModel]="PlacesData.date" required>
       </mat-form-field>
       <mat-form-field>
         <h3>Hour</h3>
-        <input matInput  formControlName="Hour" placeholder="7:00 pm"  [ngModel]="PlacesData.hour"required>
+        <input matInput name="edit_hour_place" formControlName="Hour" placeholder="7:00 pm"  [ngModel]="PlacesData.hour"required>
       </mat-form-field>
       <mat-form-field>
         <h3>Origen</h3>
-        <input matInput formControlName="origen" placeholder="Origen" [ngModel]="PlacesData.origen" required>
+        <input matInput name="edit_origin_place" formControlName="origen" placeholder="Origen" [ngModel]="PlacesData.origen" required>
       </mat-form-field>
       <mat-form-field>
         <h3>Destino</h3>
-        <input matInput formControlName="destino" placeholder="Destino" [ngModel]="PlacesData.destino" required>
+        <input matInput name="edit_destination_place" formControlName="destino" placeholder="Destino" [ngModel]="PlacesData.destino" required>
       </mat-form-field>
       <mat-form-field>
         <h3>Price</h3>
-        <input matInput formControlName="price" placeholder="Price"  [ngModel]="PlacesData.price" required>
+        <input matInput name="edit_price_place" formControlName="price" placeholder="Price"  [ngModel]="PlacesData.price" required>
       </mat-form-field>
       <mat-form-field>
         <h3>imageUrl</h3>
-        <input matInput formControlName="imageUrl" placeholder="imageUrl"  [ngModel]="PlacesData.imageUrl" required>
+        <input matInput name="edit_imageUrl_place" formControlName="imageUrl" placeholder="imageUrl"  [ngModel]="PlacesData.imageUrl" required>
       </mat-form-field>
 
 
-      <button mat-raised-button color="primary" type="submit" (click)="saveChanges()">Update</button>
+      <button mat-raised-button name="update_place_button" color="primary" type="submit" (click)="saveChanges()">Update</button>
       <button mat-raised-button color="primary" type="submit" (click)="closeEditDialog()">Cancel</button>
 
     </form>
-     <!-- <h2>View Reviews</h2>
-      <mat-form-field>
-        <label>name</label>
-        <textarea matInput [(ngModel)]="PlacesData.name"></textarea>
-      </mat-form-field>
-      <mat-form-field>
-        <label>description</label>
-        <input matInput type="text" [(ngModel)]="PlacesData.description" />
-      </mat-form-field>
-      <mat-form-field>
-        <label>date</label>
-        <input matInput type="text" [(ngModel)]="PlacesData.date" />
-      </mat-form-field>
-      <mat-form-field>
-        <label>hour</label>
-        <input matInput type="email" [(ngModel)]="PlacesData.hour" />
-      </mat-form-field>
-      <mat-form-field>
-        <label>origen</label>
-        <input matInput type="text" [(ngModel)]="PlacesData.origen" />
-      </mat-form-field>
-      <mat-form-field>
-        <label>destino</label>
-        <input matInput type="text" [(ngModel)]="PlacesData.destino" />
-      </mat-form-field>
-      <mat-form-field>
-        <label>price</label>
-        <input matInput type="text" [(ngModel)]="PlacesData.price" />
-      </mat-form-field>
+    <!-- <h2>View Reviews</h2>
+     <mat-form-field>
+       <label>name</label>
+       <textarea matInput [(ngModel)]="PlacesData.name"></textarea>
+     </mat-form-field>
+     <mat-form-field>
+       <label>description</label>
+       <input matInput type="text" [(ngModel)]="PlacesData.description" />
+     </mat-form-field>
+     <mat-form-field>
+       <label>date</label>
+       <input matInput type="text" [(ngModel)]="PlacesData.date" />
+     </mat-form-field>
+     <mat-form-field>
+       <label>hour</label>
+       <input matInput type="email" [(ngModel)]="PlacesData.hour" />
+     </mat-form-field>
+     <mat-form-field>
+       <label>origen</label>
+       <input matInput type="text" [(ngModel)]="PlacesData.origen" />
+     </mat-form-field>
+     <mat-form-field>
+       <label>destino</label>
+       <input matInput type="text" [(ngModel)]="PlacesData.destino" />
+     </mat-form-field>
+     <mat-form-field>
+       <label>price</label>
+       <input matInput type="text" [(ngModel)]="PlacesData.price" />
+     </mat-form-field>
 
-      <div class="edit-buttons">
-        <button mat-raised-button color="primary" [disabled]="PlacesData.name.length ===0 && PlacesData.description.length ===0 &&
-      PlacesData.date.length ===0 && PlacesData.hour.length ===0  && PlacesData.price ===0 " (click)="saveChanges()">Guardar cambios</button>
-        <button mat-raised-button color="warn" (click)="closeEditDialog()">Cancelar</button>
-      </div>
-    -->
+     <div class="edit-buttons">
+       <button mat-raised-button color="primary" [disabled]="PlacesData.name.length ===0 && PlacesData.description.length ===0 &&
+     PlacesData.date.length ===0 && PlacesData.hour.length ===0  && PlacesData.price ===0 " (click)="saveChanges()">Guardar cambios</button>
+       <button mat-raised-button color="warn" (click)="closeEditDialog()">Cancelar</button>
+     </div>
+   -->
   </ng-template>
 
-<ng-template #addPlaceDialog>
-  <!-- place-form.component.html -->
-  <form [formGroup]="placeForm" >
-    <mat-form-field>
-      <h3>Name</h3>
-      <input matInput formControlName="name" placeholder="Name" required>
-    </mat-form-field>
-    <mat-form-field>
-      <h3>Description</h3>
-      <textarea matInput formControlName="description" placeholder="Description" required></textarea>
-    </mat-form-field>
-    <mat-form-field>
-      <h3>Date</h3>
-      <input matInput   formControlName="Date" placeholder="24/02/23" required>
-    </mat-form-field>
-    <mat-form-field>
-      <h3>Hour</h3>
-      <input matInput  formControlName="Hour" placeholder="7:00 pm" required>
-    </mat-form-field>
-    <mat-form-field>
-      <h3>Origen</h3>
-      <input matInput formControlName="origen" placeholder="Origen" required>
-    </mat-form-field>
-    <mat-form-field>
-      <h3>Destino</h3>
-      <input matInput formControlName="destino" placeholder="Destino" required>
-    </mat-form-field>
-    <mat-form-field>
-      <h3>Price</h3>
-      <input matInput  formControlName="price" placeholder="Price" required>
-    </mat-form-field>
-    <mat-form-field>
-      <h3>imageUrl</h3>
-      <input matInput formControlName="imageUrl" placeholder="imageUrl" required>
-    </mat-form-field>
-
-    <button mat-raised-button color="primary" type="submit"   *ngIf="AddAprovade; else disabledButtonPay" (click)="OpenPaymentDialog()">Pay</button>
-
-    <button mat-raised-button color="primary"  *ngIf="PayAprovade; else disabledButton"    type="submit" (click)="onSubmit()">Create Place</button>
-  </form>
-
-</ng-template>
-
-  <ng-template #disabledButton>
-    <button mat-raised-button color="primary" type="button" disabled>Create Place</button>
-  </ng-template>
-  <ng-template #disabledButtonPay>
-    <button mat-raised-button color="primary" type="button" disabled>Pay</button>
-  </ng-template>
-
-
-
-  <ng-template #PayPost>
-    <form [formGroup]="paymentPost" >
-      <h2>Payment</h2>
+  <ng-template #addPlaceDialog>
+    <!-- place-form.component.html -->
+    <form [formGroup]="placeForm" >
       <mat-form-field>
-        <h3>creditCardNumber</h3>
-        <input matInput formControlName="creditCardNumber" placeholder="97556376262464262" required>
+        <h3>Name</h3>
+        <input matInput name="add_name_place" formControlName="name" placeholder="Name" required>
       </mat-form-field>
       <mat-form-field>
-        <h3>expirationDate</h3>
-        <textarea matInput formControlName="expirationDate" placeholder="09/2006" required></textarea>
+        <h3>Description</h3>
+        <textarea matInput name="add_description_place" formControlName="description" placeholder="Description" required></textarea>
       </mat-form-field>
       <mat-form-field>
-        <h3>cvv</h3>
-        <input matInput   formControlName="cvv" placeholder="378" required>
+        <h3>Date</h3>
+        <input matInput   name="add_date_place" formControlName="Date" placeholder="24/02/23" required>
       </mat-form-field>
       <mat-form-field>
-        <h3>cardHolderName</h3>
-        <input matInput  formControlName="cardHolderName" placeholder="Miguel Salas" required>
+        <h3>Hour</h3>
+        <input matInput name="add_hour_place" formControlName="Hour" placeholder="7:00 pm" required>
       </mat-form-field>
       <mat-form-field>
-        <h3>mount</h3>
-        <input matInput formControlName="mount" placeholder="mount" required>
+        <h3>Origen</h3>
+        <input matInput name="add_origin_place" formControlName="origen" placeholder="Origen" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>Destino</h3>
+        <input matInput name="add_destination_place" formControlName="destino" placeholder="Destino" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>Price</h3>
+        <input matInput  name="add_price_place" formControlName="price" placeholder="Price" required>
+      </mat-form-field>
+      <mat-form-field>
+        <h3>imageUrl</h3>
+        <input matInput name="add_imageUrl_place" formControlName="imageUrl" placeholder="imageUrl" required>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" type="submit" (click)="MakePayment()">Pay</button>
-      <button mat-raised-button color="primary" type="submit" (click)="CancelPayment()">Cancel</button>
 
+      <button mat-raised-button name="create_place_button" color="primary" type="submit" (click)="onSubmit()">Create Place</button>
     </form>
 
   </ng-template>
 
 
-
-
-<ng-template #PayAceptado>
-<h2>Payment Acepted</h2>
-  <button mat-raised-button color="primary" type="submit" (click)="closePaymentDialog()">Ok</button>
-
-</ng-template>
 
   <ng-template #reviewDialog>
     <table mat-table [dataSource]="dataSourceReview" class="mat-elevation-z8">
@@ -284,5 +236,3 @@
 
 
 </div>
-
-

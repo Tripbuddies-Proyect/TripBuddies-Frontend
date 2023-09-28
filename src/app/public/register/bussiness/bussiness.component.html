@@ -25,7 +25,7 @@
 
     <mat-form-field class="recruiter__email" appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput type="email" placeholder="Ex. dev777@gmail.com" formControlName="email"/>
+      <input matInput type="email" name="email" placeholder="Ex. dev777@gmail.com" formControlName="email"/>
       <mat-error *ngIf="email?.errors?.['required']">Email is <strong>required</strong></mat-error>
       <mat-error *ngIf="email?.errors?.['pattern'] || email?.errors?.['email'] ">Please enter valid <strong>email</strong></mat-error>
     </mat-form-field>
@@ -33,12 +33,12 @@
     <mat-form-field class="recruiter__password" appearance="fill">
       <mat-label>Password</mat-label>
       <input matInput type="password" name="password" formControlName="password"/>
-       </mat-form-field>
+    </mat-form-field>
 
     <mat-form-field class="recruiter__confirm-password" appearance="fill">
       <mat-label>Confirm Password</mat-label>
       <input matInput type="password" name="password_confirm" formControlName="password_confirm"/>
-      </mat-form-field>
+    </mat-form-field>
   </div>
 
   <div class="professional-info">
@@ -46,7 +46,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Marca de Automovil</mat-label>
-      <input matInput placeholder="Toyota" name="Bussiness_name" formControlName="Marca_name"/>
+      <input matInput placeholder="Toyota" name="Business_name" formControlName="Marca_name"/>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -75,5 +75,5 @@
     </mat-form-field>
 
   </div>
-  <button mat-button color="primary" class="btn-register" (click)="openDialog()">Create Account</button>
+  <button mat-button color="primary" name="create_account_button" class="btn-register" (click)="openDialog()">Create Account</button>
 </form>
