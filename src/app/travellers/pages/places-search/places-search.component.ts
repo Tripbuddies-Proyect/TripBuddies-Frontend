@@ -121,26 +121,10 @@ export class PlacesSearchComponent implements OnInit {
   }
 
   addToFavorites(id: number) {
-    this.placeService.GetPlacesById(id).subscribe(
+    console.log(id)
+    this.placeService.AddFavorite(this.UserId,id).subscribe(
       (response: any) => {
-        this.favorite.places_Id = response;
         console.log(response);
-      }
-    );
-    this.placeService.GetTravellerById(this.UserId).subscribe(
-      (response: any) => {
-        this.favorite.traveller_Id = response;
-        console.log(response);
-      }
-    );
-    this.placeService.AddFavorite(this.UserId, this.favorite).subscribe(
-      (response: any) => {
-        this.favorite = response
-        console.log(response);
-        console.log("Agregado a favoritos")
-      },
-      error => {
-        console.error('Error al agregar a favoritos:', error)
       });
   }
 
@@ -208,18 +192,18 @@ export class PlacesSearchComponent implements OnInit {
   }
 
   createReviews(id: number, review: any) {
-    this.placeService.PostReview(id, review).subscribe(
-      (response: any) => {
-        console.log(response);
-        // Actualizar la lista de reseñas del lugar después de crear la reseña
-        this.loadReviews(this.placeId);
-        this.closeEditDialog(); // Cerrar el diálogo de añadir reseña
-      },
-      (error: any) => {
-        console.error('Error al crear la reseña:', error);
-        // Manejar el error según sea necesario
-      }
-    );
+    //this.placeService.PostReview(id, review).subscribe(
+    //  (response: any) => {
+    //    console.log(response);
+    //    // Actualizar la lista de reseñas del lugar después de crear la reseña
+    //    this.loadReviews(this.placeId);
+    //    this.closeEditDialog(); // Cerrar el diálogo de añadir reseña
+    //  },
+    //  (error: any) => {
+    //    console.error('Error al crear la reseña:', error);
+    //    // Manejar el error según sea necesario
+    //  }
+    //);
   }
 
   add() {

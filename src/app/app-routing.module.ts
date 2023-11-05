@@ -15,6 +15,7 @@ import {ProfileTravellerComponent} from "./travellers/pages/profile-traveller/pr
 import {FavoritesTravellerComponent} from "./travellers/pages/favorites-traveller/favorites-traveller.component";
 import {MatchsTravellerComponent} from "./travellers/pages/matchs-traveller/matchs-traveller.component";
 import {PlacesSearchComponent} from "./travellers/pages/places-search/places-search.component";
+import {AdquisicionsTranvellerComponent} from "./travellers/pages/adquisicions-tranveller/adquisicions-tranveller.component";
 import {ReviewsPlacesComponent} from "./travellers/pages/places-search/reviews-places/reviews-places.component";
 import {HomeBussinessComponent} from "./bussiness/pages/home-bussiness/home-bussiness.component";
 import {
@@ -24,7 +25,6 @@ import {PlansBussinessComponent} from "./bussiness/pages/plans-bussiness/plans-b
 import {ProfileBussinessComponent} from "./bussiness/pages/profile-bussiness/profile-bussiness.component";
 import {BusinessComponent} from "./bussiness/pages/business/business.component";
 import {PaymentsBussinessComponent} from "./bussiness/pages/payments-bussiness/payments-bussiness.component";
-
 const routes: Routes = [
   {path:'', component:LoginComponent},
   {path:'login', component: LoginComponent},
@@ -40,6 +40,7 @@ const routes: Routes = [
       {path: 'messages', component: MessagesTravellerComponent},
       {path: 'favorites', component: FavoritesTravellerComponent},
       {path: 'matches', component: MatchsTravellerComponent},
+      {path: 'adquisicions', component: AdquisicionsTranvellerComponent},
       {path: 'search', component: PlacesSearchComponent},
       {path: 'reviews', component: ReviewsPlacesComponent},
   ]

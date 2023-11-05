@@ -60,6 +60,7 @@ import {CdkColumnDef} from "@angular/cdk/table";
 import { BusinessComponent } from './bussiness/pages/business/business.component';
 import { AddCardDialogComponent } from './bussiness/pages/add-card-dialog/add-card-dialog.component';
 import { PaymentsBussinessComponent } from './bussiness/pages/payments-bussiness/payments-bussiness.component';
+import { AdquisicionsTranvellerComponent } from './travellers/pages/adquisicions-tranveller/adquisicions-tranveller.component';
 
 @NgModule({
   declarations: [
@@ -95,7 +96,8 @@ import { PaymentsBussinessComponent } from './bussiness/pages/payments-bussiness
     ReviewsPlacesComponent,
     BusinessComponent,
     AddCardDialogComponent,
-    PaymentsBussinessComponent
+    PaymentsBussinessComponent,
+    AdquisicionsTranvellerComponent
   ],
   imports: [
     BrowserModule,

@@ -26,7 +26,7 @@ export class FavoritesTravellerComponent implements OnInit {
   Placesdata: Places;
   Travellerdata: Traveller;
   Favoritedata: Favorite;
-  displayedColumns: string[] = ['id', 'name', 'description', 'location', 'country', 'price', 'imagenurl', 'favorite'];
+  displayedColumns: string[] = [ 'name', 'description', 'location', 'country', 'price', 'imagenurl', 'favorite'];
 
   constructor(private router: Router, private favoriteService: TravellerService, private travellerService: TravellerService) {
     this.Placesdata = {} as Places;
@@ -36,9 +36,7 @@ export class FavoritesTravellerComponent implements OnInit {
 
   ngOnInit() {
     this.UserId = Number(localStorage.getItem('id'));
-    console.log(this.UserId)
     this.getTravellersById(this.UserId);
-    console.log(this.Travellerdata)
   }
 
   getTravellersById(id: any) {
@@ -65,5 +63,7 @@ export class FavoritesTravellerComponent implements OnInit {
   deleteButton(element: any) {
     element.favorite = !element.favorite;
     this.deleteFavorite(element.id);
+    this.getListfavoritesById(this.Travellerdata.id);
+
   }
 }

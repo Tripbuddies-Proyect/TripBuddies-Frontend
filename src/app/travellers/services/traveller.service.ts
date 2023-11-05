@@ -22,6 +22,10 @@ export class TravellerService {
   ReviewURL = "http://localhost:8080/api/reviews";
   ReviewPlacesURL = "http://localhost:8080/api/reviews/places";
   AdqusisiconURL = "http://localhost:8080/api/v1/Adquisicions";
+
+
+
+
   constructor(private http: HttpClient) { }
   httpOptions = {
     headers: new HttpHeaders({
@@ -72,8 +76,8 @@ export class TravellerService {
       .get<Traveller>(`${this.baseURL}/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
-  AddFavorite(id:number, fav: any): Observable<Favorite>{
-    return this.http.post<Favorite>(`http://localhost:8080/api/v1/favorites/${id}`,JSON.stringify(fav), this.httpOptions)
+  AddFavorite(userId:number, placeId: number): Observable<Favorite>{
+    return this.http.post<Favorite>(`http://localhost:8080/api/v1/favorites/${userId}/${placeId}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   UpdateTraveller(traveller: Traveller): Observable<Traveller>{
@@ -135,8 +139,8 @@ export class TravellerService {
     return this.http.delete<object>(`${this.favoriteURL}/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
-  PostReview(travellerId: any, review: Review): Observable<any>{
-    return this.http.post<any>(`${this.PostReviewURL}/${travellerId}`, JSON.stringify(review), this.httpOptions)
+  PostReview(travellerId: number,placesid:number, review: Review): Observable<Review>{
+    return this.http.post<any>(`${this.PostReviewURL}/${placesid}/traveller/${travellerId}`, JSON.stringify(review), this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   GetPlacesByLocation(location: string): Observable<Places>{

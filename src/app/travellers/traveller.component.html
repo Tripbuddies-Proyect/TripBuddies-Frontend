@@ -23,7 +23,7 @@
 <mat-sidenav-container>
 
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img class="avatar mat-elevation-z8" [src]="traveller.image" width="30%">
+    <img class="avatar mat-elevation-z8" src="{{traveller.image}}" width="30%">
     <h4 class="name">{{traveller.firstName}} {{traveller.lastName}} </h4>
     <p class="designation">Tourmates</p>
     <mat-divider></mat-divider>
@@ -54,6 +54,10 @@
     <button mat-button class="menu-button" (click)="setOption()" routerLink="matches">
       <mat-icon> list </mat-icon>
       <span> Match list</span>
+    </button>
+    <button mat-button class="menu-button" (click)="setOption()" routerLink="adquisicions">
+      <mat-icon>list</mat-icon>
+      <span> Adquisicions</span>
     </button>
     <button mat-button class="menu-button"  (click)="disableOption()" routerLink="/login">
       <mat-icon> logout</mat-icon>

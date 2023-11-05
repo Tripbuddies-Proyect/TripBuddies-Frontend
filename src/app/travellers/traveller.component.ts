@@ -62,9 +62,9 @@ export class TravellersComponent implements OnInit{
     this.profile = false;
   }
   private GetAllNotifications() {
-    this.service.GetAllNotifications(toInteger(localStorage.getItem("id"))).subscribe((response:any)=> {
-      this.notifications = response;
-      console.log(this.notifications);
-    });
+   // this.service.GetAllNotifications(toInteger(localStorage.getItem("id"))).subscribe((response:any)=> {
+     // this.notifications = response;
+     // console.log(this.notifications);
+   // });
   }
 }
