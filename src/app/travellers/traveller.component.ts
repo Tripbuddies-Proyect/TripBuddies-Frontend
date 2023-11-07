@@ -22,12 +22,13 @@ export class TravellersComponent implements OnInit{
   constructor(private observer: BreakpointObserver, private router:Router, private route: ActivatedRoute, private service: TravellerService) {
   }
   ngOnInit(): void {
-    this.ngAfterViewInit();
-    this.GetAllNotifications();
+    this.traveller= {} as Traveller;
     const id = toInteger(localStorage.getItem("id"));
     this.service.GetTravellerById(id).subscribe((response:any)=>{
       this.traveller = response;
     });
+    this.ngAfterViewInit();
+    this.GetAllNotifications();
   }
 
   private ngAfterViewInit() {
@@ -36,14 +37,19 @@ export class TravellersComponent implements OnInit{
       .pipe(delay(1))
       .subscribe((res) => {
         if (res.matches) {
-          this.sidenav.mode = 'over';
-          this.sidenav.close();
+          if (this.sidenav) { // Verificar si sidenav está definido
+            this.sidenav.mode = 'over';
+            this.sidenav.close();
+          }
         } else {
-          this.sidenav.mode = 'side';
-          this.sidenav.open();
+          if (this.sidenav) { // Verificar si sidenav está definido
+            this.sidenav.mode = 'side';
+            this.sidenav.open();
+          }
         }
-      })
+      });
   }
+
   analizeRoot(){
     this.currentRoute = this.router.url;
     //find profile string in current route

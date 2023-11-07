@@ -23,14 +23,15 @@ export class PlacesSearchComponent implements OnInit {
   destino: string = '';
   placess: Places[] = [];
   places: MatTableDataSource<Places>;
-  displayedColumns: string[] = ['photo', 'name', 'description', 'location', 'price', 'favorite', 'reviews'];
-  displayedColumnsAllPlaces: string[] = ['photo', 'name', 'description', 'location', 'price', 'favorite', 'reviews', 'adquisicion'];
+  displayedColumns: string[] = ['photo', 'name', 'description','price','date', 'favorite', 'reviews'];
+  displayedColumnsAllPlaces: string[] = ['photo', 'name','location', 'description', 'price', 'favorite', 'reviews', 'adquisicion'];
 
   place: Places;
   newReviewContent: string = '';
   review: Review;
-  displayedColumns2: string[] = ['profileImage', 'fullName', 'reviewContent', 'actions'];
-  reviewsData: Review[] = [];
+  displayedColumns2: string[] = ['fullName', 'reviewContent', 'actions'];
+  reviewsData: MatTableDataSource<Review>;
+  reviewsF:Review[]=[];
   reviewForm: FormGroup;
   users: Traveller;
   UserId: number = 0;
@@ -62,6 +63,7 @@ export class PlacesSearchComponent implements OnInit {
     this.users = {} as Traveller;
     this.favorite = {} as Favorite;
     this.places = new MatTableDataSource(this.placess);
+    this.reviewsData = new MatTableDataSource(this.reviewsF);
     this.reviewForm = this.formBuilder.group({
       reviewText: ['', [Validators.required, Validators.maxLength(500)]]
     });
@@ -86,12 +88,9 @@ export class PlacesSearchComponent implements OnInit {
   searchPlaces() {
     this.placeService.searchPlacesByLocation(this.destino).subscribe(
       (response: any) => {
-        this.places = response;
-      },
-      (error: any) => {
-        console.error('Error al buscar lugares:', error);
+        console.log(response);
       }
-    );
+    )
   }
 
   openLocationAll() {
@@ -112,6 +111,13 @@ export class PlacesSearchComponent implements OnInit {
   }
 
   openEditDialog(id: number) {
+    this.placeService.GetReviewByPlaceId(id).subscribe((response: any) => {
+      this.reviewsF = response;
+    },(error: any) => {
+      console.error('Error al Obtener la reseña:', error);
+          // Manejar el error según sea necesario
+        }
+    );
     this.dialog.open(this.editDialog);
     this.loadReviews(id);
   }
@@ -191,8 +197,11 @@ export class PlacesSearchComponent implements OnInit {
   onSubmit() {
   }
 
-  createReviews(id: number, review: any) {
-    //this.placeService.PostReview(id, review).subscribe(
+  createReviews(travellerid: number,Placeid:number, review: Review) {
+    this.placeService.PostReview(Placeid,travellerid, review).subscribe( (response:any)=> {
+      console.log(response)
+
+    });
     //  (response: any) => {
     //    console.log(response);
     //    // Actualizar la lista de reseñas del lugar después de crear la reseña
@@ -207,7 +216,8 @@ export class PlacesSearchComponent implements OnInit {
   }
 
   add() {
-    this.createReviews(this.placeId, this.review);
+    this.createReviews(this.UserId,this.placeId, this.review)
+    this.dialog.closeAll();
   }
 
   //GetTravellerId(id:any){
@@ -219,7 +229,7 @@ export class PlacesSearchComponent implements OnInit {
   //}
   GetPlacesId(id: any) {
     this.placeService.GetPlacesById(id).subscribe((response: any) => {
-      this.review.places = response;
+      //this.review.places = response;
       console.log(response)
     });
   }

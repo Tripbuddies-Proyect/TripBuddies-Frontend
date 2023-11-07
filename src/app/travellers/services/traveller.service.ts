@@ -139,8 +139,8 @@ export class TravellerService {
     return this.http.delete<object>(`${this.favoriteURL}/${id}`, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
-  PostReview(travellerId: number,placesid:number, review: Review): Observable<Review>{
-    return this.http.post<any>(`${this.PostReviewURL}/${placesid}/traveller/${travellerId}`, JSON.stringify(review), this.httpOptions)
+  PostReview(placesid: number,travellerId:number, review: Review): Observable<Review>{
+    return this.http.post<any>(`${this.PostReviewURL}/${placesid}/traveller/${travellerId}`,review, this.httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
   GetPlacesByLocation(location: string): Observable<Places>{

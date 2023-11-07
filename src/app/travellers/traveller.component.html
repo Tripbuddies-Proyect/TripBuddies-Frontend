@@ -23,7 +23,7 @@
 <mat-sidenav-container>
 
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img class="avatar mat-elevation-z8" src="{{traveller.image}}" width="30%">
+    <img class="avatar mat-elevation-z8" src={{traveller.image}} width="30%">
     <h4 class="name">{{traveller.firstName}} {{traveller.lastName}} </h4>
     <p class="designation">Tourmates</p>
     <mat-divider></mat-divider>
@@ -35,14 +35,14 @@
       <mat-icon> search </mat-icon>
       <span> Search Places</span>
     </button>
-    <button mat-button class="menu-button" (click)="disableOption()" routerLink="messages">
+    <!--<button mat-button class="menu-button" (click)="disableOption()" routerLink="messages">
       <mat-icon>messages</mat-icon>
       <span> Messages </span>
     </button>
     <button mat-button class="menu-button" (click)="disableOption()" routerLink="notifications">
       <mat-icon matBadge="{{notifications.length}}" matBadgeColor="warn" >notifications</mat-icon>
       <span> Notifications</span>
-    </button>
+    </button>-->
     <button mat-button class="menu-button" (click)="setOption()" routerLink="profile">
       <mat-icon> person</mat-icon>
       <span> Profile</span>
