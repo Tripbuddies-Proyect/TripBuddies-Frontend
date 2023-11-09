@@ -1,0 +1,176 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-image: url("https://th.bing.com/th/id/R.d810260d3b3c97094079a3c0f67d7d0d?rik=aJoHfFjfGHWC5g&riu=http%3a%2f%2fsalirdelpais.com%2fwp-content%2fuploads%2f2017%2f09%2fCuatro-curiosidades-que-te-sorprender%c3%a1n-sobre-viajar-en-avi%c3%b3n-salir-del-pais.jpg&ehk=d9ffYExxB5shYr7EZDTk3bearqXiAjRjBRL5cLx8Dts%3d&risl=&pid=ImgRaw&r=0");
+  background-size: cover;
+}
+.adquisicion-message {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
+}
+.adquisicion-message-failled {
+  background-color:darkred;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.adquisicion-message button {
+  color: white;
+}
+
+
+.option {
+  margin-bottom: 20px;
+}
+
+.results {
+  margin-top: 20px;
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.photo-cell {
+  width: 150px;
+}
+
+.photo-cell img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.review-card {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.review-info h3 {
+  margin: 0;
+}
+
+.review-actions {
+  margin-left: auto;
+}
+
+.create-review {
+  margin-top: 20px;
+}
+
+.edit-buttons {
+  margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .results {
+    overflow-x: auto;
+  }
+
+  table {
+    width: auto;
+  }
+
+  th,
+  td {
+    white-space: nowrap;
+  }
+}
+.place-image {
+  width: 50px;
+  height: 50px; /* Ajusta el tamaño según tus necesidades */
+}
+.map-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.map-image img {
+  max-width: 70%;
+  height: auto;
+  border-radius: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mat-table-responsive {
+  overflow-x: auto;
+}
+.profile-image {
+  width: 50px; /* Ajusta el tamaño según tus necesidades */
+  height: 50px; /* Ajusta el tamaño según tus necesidades */
+}
+.add-review-button {
+  margin-bottom: 10px;
+}
+
+.add-review-button button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.add-review-button button:hover {
+  background-color: #0069d9;
+}
+
+.add-review-button button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.add-review-button button:active {
+  background-color: #0056b3;
+}
+

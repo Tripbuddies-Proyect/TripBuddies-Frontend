@@ -1,0 +1,107 @@
+<section class="messages">
+
+  <!-- Inbox for phone's mode  -->
+  <div class="inbox" *ngIf="!show && mobile">
+    <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+      <div *ngFor="let contact of contacts">
+        <mat-card class="contact" matRipple [matRippleCentered]="true" (click)="show = !show; contactDescription = contact.emitter.description; contactName = contact.emitter.firstName + ' ' + contact.emitter.lastName; contactId=contact.emitter.id; contactPhoto=contact.emitter.image; GetMessages(contact.emitter.id)">
+          <mat-card-header>
+            <div mat-card-avatar>
+              <img [src]="contact.emitter.image" alt="Recruiter's profile photo" class="RecruiterPhoto">
+            </div>
+            <mat-card-title>{{contact.emitter.firstName + " " + contact.emitter.lastName}}</mat-card-title>
+            <mat-card-subtitle>{{contact.message}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+  <!-- Inbox for big screen  -->
+  <div class="inbox" *ngIf="!mobile">
+    <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
+      <div *ngFor="let contact of contacts">
+        <mat-card class="contact" matRipple [matRippleCentered]="true" (click)="show = !show; contactDescription = contact.emitter.description; contactName = contact.emitter.firstName + ' ' + contact.emitter.lastName; contactId=contact.emitter.id; contactPhoto=contact.emitter.image; GetMessages(contact.emitter.id)">
+          <mat-card-header>
+            <div mat-card-avatar>
+              <img [src]="contact.emitter.image" alt="Recruiter's profile photo" class="RecruiterPhoto">
+            </div>
+            <mat-card-title>{{contact.emitter.firstName + " " + contact.emitter.lastName}}</mat-card-title>
+            <mat-card-subtitle>{{contact.message}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+
+  <!--  Chat for phone's mode  -->
+  <div class="chat" *ngIf="show && mobile">
+
+    <mat-card class="chat-header">
+      <mat-card-header>
+        <button mat-icon-button (click)="show = !show">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <div mat-card-avatar>
+          <img [src]="contactPhoto" alt="Recruiter's profile photo" class="RecruiterPhoto">
+        </div>
+        <mat-card-title>{{contactName}}</mat-card-title>
+        <mat-card-subtitle>{{contactDescription}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <cdk-virtual-scroll-viewport itemSize="50" class="conversation">
+      <div *ngFor="let message of messages">
+        <div *ngIf="message.emitter.role === 'bussiness'" class="bubble1">
+          <p>{{message.message}}</p>
+        </div>
+        <div *ngIf="message.emitter.role === 'traveller'" class="bubble2">
+          <p>{{message.message}}</p>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+    <div class="answer" >
+      <mat-form-field appearance="fill" style="width: calc(100% - 40px);">
+        <textarea matInput (keydown.enter)="SendMessage(contactId)" [(ngModel)]='answer'></textarea>
+      </mat-form-field>
+      <button mat-icon-button (click)="SendMessage(contactId)">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!--  Chat for big screen-->
+  <div class="chat" *ngIf="!mobile">
+
+    <mat-card class="chat-header">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <img [src]="contactPhoto" alt="Recruiter's profile photo" class="RecruiterPhoto">
+        </div>
+        <mat-card-title>{{contactName}}</mat-card-title>
+        <mat-card-subtitle>{{contactDescription}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <cdk-virtual-scroll-viewport itemSize="50" class="conversation">
+      <div *ngFor="let message of messages">
+        <div *ngIf="message.emitter.role === 'bussiness'" class="bubble1">
+          <p>{{message.message}}</p>
+        </div>
+        <div *ngIf="message.emitter.role === 'traveller'" class="bubble2">
+          <p>{{message.message}}</p>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+
+    <div class="answer" >
+      <mat-form-field appearance="fill" style="width: calc(100% - 40px);">
+        <textarea matInput (keydown.enter)="SendMessage(contactId)" [(ngModel)]='answer'></textarea>
+      </mat-form-field>
+      <button mat-icon-button (click)="SendMessage(contactId)">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+
+  </div>
+
+</section>

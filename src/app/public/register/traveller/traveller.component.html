@@ -1,0 +1,52 @@
+<form class="register-dev-form" [formGroup]="registerForm">
+  <div class="main-div">
+    <mat-form-field class="register-dev__firstname" appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="Ex. Evans" name="first_name" formControlName="first_name"/>
+      <mat-error *ngIf="first_name?.errors?.['required']">Name is <strong>required</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="register-dev__lastname" appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Ex. Johnson" name="last_name" formControlName="last_name"/>
+      <mat-error *ngIf="last_name?.errors?.['required']">Lastname is <strong>required</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="register-dev__phone" appearance="fill">
+      <mat-label>Telephone</mat-label>
+      <span matPrefix>+51 &nbsp;</span>
+      <input type="tel" matInput placeholder="955-555-123" name="phone" formControlName="phone"/>
+      <mat-icon matSuffix>call</mat-icon>
+      <mat-error *ngIf="phone?.errors?.['required']">Phone is <strong>required</strong></mat-error>
+      <mat-error *ngIf="phone?.errors?.['minlength']">Minimum 9 <strong>characters</strong></mat-error>
+      <mat-error *ngIf="phone?.errors?.['maxlength']">Maximum 9 <strong>characters</strong></mat-error>
+      <mat-error *ngIf="phone?.errors?.['pattern']">Only <strong>numbers</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="register-dev__email" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="Ex. tra777@gmail.com" formControlName="email"/>
+      <mat-error *ngIf="email?.errors?.['required']">Email is <strong>required</strong></mat-error>
+      <mat-error *ngIf="email?.errors?.['pattern'] || email?.errors?.['email'] ">Please enter valid <strong>email</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="register-dev__password" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" name="password" formControlName="password" />
+      <mat-error *ngIf="password?.errors?.['required']">Password is <strong>required</strong></mat-error>
+      <mat-error *ngIf="password?.errors?.['minlength']">At least 8 <strong>characters</strong></mat-error>
+      <mat-error *ngIf="password?.errors?.['maxlength']">Maximum 16 <strong>characters</strong></mat-error>
+      <mat-error *ngIf="password?.errors?.['pattern']">Should contain numbers and letters/special <strong>characters!</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="register-dev__confirm-password" appearance="fill">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" name="password_confirm" formControlName="password_confirm"/>
+      <mat-error *ngIf="password_confirm?.errors?.['required']">Password is <strong>required</strong></mat-error>
+      <mat-error *ngIf="password_confirm?.errors?.['minlength']">At least 8 <strong>characters</strong></mat-error>
+      <mat-error *ngIf="password_confirm?.errors?.['maxlength']">Maximum 16 <strong>characters</strong></mat-error>
+      <mat-error *ngIf="password_confirm?.errors?.['MustMatch']">Do not match <strong>password</strong></mat-error>
+    </mat-form-field>
+  </div>
+  <button mat-button color="primary" class="btn-register" (click)="openDialog()">Create Account</button>
+</form>

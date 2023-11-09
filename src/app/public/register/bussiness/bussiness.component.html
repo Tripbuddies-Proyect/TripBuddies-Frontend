@@ -1,0 +1,79 @@
+<form class="register-dev-form" [formGroup]="registerForm">
+  <div class="main-div">
+    <mat-form-field class="recruiter__firstname" appearance="fill">
+      <mat-label>First Name</mat-label>
+      <input matInput placeholder="Ex. Evans" name="first_name" formControlName="first_name"/>
+      <mat-error *ngIf="first_name?.errors?.['required']">Name is <strong>required</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="recruiter__lastname" appearance="fill">
+      <mat-label>Last Name</mat-label>
+      <input matInput placeholder="Ex. Johnson" name="last_name" formControlName="last_name"/>
+      <mat-error *ngIf="last_name?.errors?.['required']">Lastname is <strong>required</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="recruiter__phone" appearance="fill">
+      <mat-label>Telephone</mat-label>
+      <span matPrefix>+51 &nbsp;</span>
+      <input type="tel" matInput placeholder="955-555-123" name="phone" formControlName="phone"/>
+      <mat-icon matSuffix>call</mat-icon>
+      <mat-error *ngIf="phone?.errors?.['required']">Phone is <strong>required</strong></mat-error>
+      <mat-error *ngIf="phone?.errors?.['minlength']">Minimum 9 <strong>characters</strong></mat-error>
+      <mat-error *ngIf="phone?.errors?.['maxlength']">Maximum 9 <strong>characters</strong></mat-error>
+      <mat-error *ngIf="phone?.errors?.['pattern']">Only <strong>numbers</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="recruiter__email" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" name="email" placeholder="Ex. dev777@gmail.com" formControlName="email"/>
+      <mat-error *ngIf="email?.errors?.['required']">Email is <strong>required</strong></mat-error>
+      <mat-error *ngIf="email?.errors?.['pattern'] || email?.errors?.['email'] ">Please enter valid <strong>email</strong></mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="recruiter__password" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" name="password" formControlName="password"/>
+    </mat-form-field>
+
+    <mat-form-field class="recruiter__confirm-password" appearance="fill">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" name="password_confirm" formControlName="password_confirm"/>
+    </mat-form-field>
+  </div>
+
+  <div class="professional-info">
+    <h3>Enter information of your Carrier</h3>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Marca de Automovil</mat-label>
+      <input matInput placeholder="Toyota" name="Business_name" formControlName="Marca_name"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>RUC</mat-label>
+      <input matInput type="number" placeholder="Ex. 20552103816" name="ruc" formControlName="ruc_name"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Plate</mat-label>
+      <input matInput placeholder="ABC-123" name="Plate_name" formControlName="Plate_name"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Address</mat-label>
+      <input matInput placeholder="Ex. 1234 NW Bobcat Lane" name="address" formControlName="address"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Country</mat-label>
+      <input matInput placeholder="Ex. United States" name="country" formControlName="country"/>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>City</mat-label>
+      <input matInput placeholder="Ex. New York" name="city" formControlName="city"/>
+    </mat-form-field>
+
+  </div>
+  <button mat-button color="primary" name="create_account_button" class="btn-register" (click)="openDialog()">Create Account</button>
+</form>

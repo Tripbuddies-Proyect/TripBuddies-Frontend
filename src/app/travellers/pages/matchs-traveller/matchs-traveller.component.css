@@ -1,0 +1,63 @@
+.traveller-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.traveller-card {
+  width: 300px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.traveller-profile {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #f2f2f2;
+}
+
+.traveller-profile img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.mat-card-content {
+  padding: 16px;
+  text-align: center;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+button:focus {
+  outline: none;
+}
+
+button.active {
+  transform: scale(1.2);
+}
+
+button mat-icon {
+  color: #e91e63;
+}

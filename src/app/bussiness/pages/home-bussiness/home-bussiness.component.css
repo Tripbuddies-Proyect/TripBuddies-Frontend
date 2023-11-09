@@ -1,0 +1,119 @@
+*{
+  margin:0;
+  padding:5px ;
+}
+.content {
+  height: 88%;
+
+
+}
+table{
+  width: 100%;
+}
+
+.table-image{
+  width: 100px;
+  height: 100px;
+}
+.ContentHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin-bottom: 20px;
+}
+
+.advice {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+button.options-toolbar {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button.options-toolbar:hover {
+  background-color: #0056b3;
+}*{
+   margin:0;
+   padding:5px ;
+ }
+.content {
+  height: 88%;
+
+
+}
+table{
+  width: 100%;
+}
+
+.ContentHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  margin-bottom: 20px;
+}
+
+.advice {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+button.options-toolbar {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button.options-toolbar:hover {
+  background-color: #0056b3;
+}
+/* place-form.component.css */
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form {
+  width: 300px;
+  height: 400px;
+  padding: -100px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button {
+  width: 50%;
+}

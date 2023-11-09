@@ -1,0 +1,71 @@
+<mat-grid-list cols="3" rowHeight="890px">
+  <mat-grid-tile>
+    <mat-card style="background-color: #F2e2c4;"class="plan">
+      <mat-card-header>
+        <mat-card-title class = "card-title">Básico</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p> La versión Básica de Tourmates para empresarios. Este plan les brinda
+          la oportunidad de tener visibilidad en nuestra plataforma
+          y llegar a una amplia base de usuarios turistas. </p>
+        <ul class="check-list">
+          <li>Registra hasta 3 destinos turísticos ✈️</li>
+          <li>Comunicación con los usuarios interesados 💬</li>
+          <li>Notificaciones sobre interesados 🔔 </li>
+          <li>Calificaciones y comentarios sobre sus destinos⭐</li>
+        </ul>
+        <!-- Otros detalles del plan básico -->
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="custom-color"(click)="openDialog()">Seleccionar</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card style="background-color: #F2b56b;" class="plan">
+      <mat-card-header>
+        <mat-card-title  class = "card-title">Premium</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>La versión Premium de Tourmates cuenta con las características del plan Básico, y muchas herramientas más que ayudarán a impulsar tu negocio de turismo.</p>
+        <ul class="check-list">
+          <li>Registra hasta 10 destinos turísticos ✈️</li>
+          <li>Comunicación con los usuarios interesados 💬</li>
+          <li>Notificaciones sobre interesados 🔔 </li>
+          <li>Calificaciones y comentarios sobre sus destinos⭐</li>
+          <li>Acceso a estadísticas sobre sus destinos registrados 📈</li>
+          <li>Publicar promociones personalizadas 🤑</li>
+        </ul>
+        <!-- Otros detalles del plan premium -->
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="custom-color"(click)="openDialog()">Seleccionar</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card style="background-color: #F2d479;" class="plan">
+      <mat-card-header>
+        <mat-card-title  class = "card-title">Platinum</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Para quienes desean aprovechar todo el potencial de Tourmates sin limitaciones.</p>
+        <p>Podrás acceder a todas las características del plan Premium y más </p>
+        <ul class="check-list">
+          <li>Registra destinos turísticos ilimitados✈️</li>
+          <li>Herramienta de rastreo de tendencias🔎</li>
+          <li>Comunicación con los usuarios interesados 💬</li>
+          <li>Notificaciones personalizables 🔔 </li>
+          <li>Calificaciones y comentarios sobre sus destinos⭐</li>
+          <li>Acceso a estadísticas avanzadas 📈</li>
+          <li>Publicar promociones y ofertas personalizadas 🤑</li>
+          <li>Personalización avanzada del perfil de la empresa: branding y coloring ✏️</li>
+        </ul>
+        <!-- Otros detalles del plan platinum -->
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="custom-color"(click)="openDialog()">Seleccionar</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
